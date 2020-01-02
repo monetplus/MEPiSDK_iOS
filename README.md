@@ -19,13 +19,6 @@ This documentation describes the MEPi SDK provided by Monet+ and Ahead iTec to d
 ### Integration to project
 Component of MEPi SDK are published to online repositories. Integrating application can either use dependencies directly from repository or download binaries and use them as local dependencies.
 
-Android binaries
-- Nexus repository: https://nexus3-public.monetplus.cz/#browse/browse
-- credentials:
-
-iOS binaries:
-- Github repository: https://github.com/monetplus
-
 ### Supported scenarios
 
 #### Status

@@ -2,13 +2,13 @@
 MEP is a system for client authentication and transaction authorization. MEPi SDK is a set of components that allow multiple mobile applications (provided by group companies and 3rd parties - partners) to use federated identification, authentication and authorization features of MEP. Various components of MEPi SDK provide a way to integrate to various components of MEP's backend components. Integrating application will use MEPi SDK to authenticate its users and authorize their operations inside the application.
 
 ## Purpose of this documentation
-This documentation describes the MEPi SDK provided by Monet+ and Ahead iTec to developers of applications that use the services of MEP. This documentation will be subject to further changes as the MEP evolve. This documentation does not describe any business and organizational aspects of the “Integrating application onboarding process”.
+This documentation describes the MEPi SDK provided by Monet+ and AHEAD iTec to developers of applications that use the services of MEP. This documentation will be subject to further changes as the MEP evolve. This documentation does not describe any business and organizational aspects of the “Integrating application onboarding process”.
 
 ## Content of this document
-1. Components
-2. Integration
-3. Supported scenarios
-4. Error handling
+1. [Components](#components)
+2. [Integration](#integration-to-project)
+3. [Supported scenarios](#supported-scenarios)
+4. [Error handling](#error-handling)
 
 ### Components
 - MEPi
@@ -59,7 +59,7 @@ CASE mobile has its own links that will be used by integrating application and `
 - `MEPiCommons.LoginInput`
 - `MEPiCommons.LoginOutput`
 
-##### Login using username password and sms
+#### Login using username password and sms
 If CASE mobile is not available on the device, the integrating application can present the user with a series of forms to enable login by username, password, and SMS code.
 
 This login scenario consists of 3 stages:

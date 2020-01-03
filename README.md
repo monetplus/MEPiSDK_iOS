@@ -59,7 +59,7 @@ CASE mobile has its own links that will be used by integrating application and `
 - `MEPiCommons.LoginInput`
 - `MEPiCommons.LoginOutput`
 
-##### Login using username password and sms
+#### Login using username password and sms
 If CASE mobile is not available on the device, the integrating application can present the user with a series of forms to enable login by username, password, and SMS code.
 
 This login scenario consists of 3 stages:

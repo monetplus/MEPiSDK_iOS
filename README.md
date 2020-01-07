@@ -4,6 +4,27 @@ MEP is a system for client authentication and transaction authorization. MEPi SD
 ## Purpose of this documentation
 This documentation describes the MEPi SDK provided by Monet+ and AHEAD iTec to developers of applications that use the services of MEP. This documentation will be subject to further changes as the MEP evolve. This documentation does not describe any business and organizational aspects of the “Integrating application onboarding process”.
 
+## Brief history behind MEPi SDK
+MEPi SDK and CMi SDK builds upon concept of federated identity. Identity of a user, that was paired with instance of CASE mobile application. The identity could be used by another application on device - hence federated identity.
+
+Integrating application can outsource features like identification, authentication and authorization to the CASE mobile application.
+
+This approach has multiple business benefits:
+- Customers activate (enroll) just CASE mobile - all other apps can be just downloaded and used directly without any activation
+- CASE mobile can be built as the “trust element”, “the key to the bank” and is the only place (application) that requests customers to enter the PIN
+- Bank Federated Identity can be used in 3rd party partner applications, which (independently from the size, brand power or trustworthiness of the partner) technically have to be treated as untrusted elements in the business process.
+
+With CASE mobile handling all communication with the FS ecosystem, other integrating applications do not need to bother with implementation details of the MEP FS backend, do not need to handle enrollment, activation and other processes related to the lifecycle of the activated mobile app, and - most importantly - do not need to synchronize their lifecycle with releases the security infrastructure. 
+
+Applications could use this identity by integrating so called CASE mobile integration SDK (CMi SDK). The CMi SDK was designed as the single point of contact between integrating application and the MEP FS ecosystem.
+
+MEPi SDK adds another set of features to the set. In cases, where integrating application does not want to enforce usage of CASE mobile identity. Integrating application can take more responsibilities and (via MEPi SDK) communicate directly with MEP FS backend. See further description about [supported scenarios](#supported-scenarios) for details.
+
+### MEPi SDK vs CMi SDK v5
+To some extend, MEPi SDK could be considered as next generation of CMi SDK. A slight problem with that is that MEPi SDK also provides different features than CMi SDK did and those new features do not relate to CASE mobile in any way. More correct way would be to say that MEPi SDK _contains_ CMi SDK.
+
+Nevertheless, in general, non-technical discussions those two terms can be used as synonyms.
+
 ## Content of this document
 1. [Components](#components)
 2. [Integration](#integration-to-project)
@@ -11,18 +32,49 @@ This documentation describes the MEPi SDK provided by Monet+ and AHEAD iTec to d
 4. [Error handling](#error-handling)
 
 ### Components
-- MEPi
-- FSi
-- CMi
-- MEPi Commons
+- MEPi - provides status, activation, deactivation, biometric login scenarios
+- FSi - provides authentication and authorization from integrating native mobile application
+- CMi - provides authentication and authorization using CASE mobile application
+- MEPi Commons - provides common logic used in other components
 
 ### Integration to project
 Component of MEPi SDK are published to online repositories. Integrating application can either use dependencies directly from repository or download binaries and use them as local dependencies.
 
+#### Android binaries:
+[Monet's public Nexus repository (credentials required)](https://nexus3-public.monetplus.cz/#browse/browse) 
+Setup Nexus maven repository in your project.
+Add to module's gradle file:
+```
+repositories {
+    maven {
+        credentials {
+            username "<your username>""
+            password "<your password>"
+        }
+        url "https://nexus3-public.monetplus.cz/repository/ahead-android-csob-release/"
+    }
+}
+```
+Add following gradle dependencies:
+```
+    implementation 'com.aheaditec.mepisdk:cmi-tp:0.1.0'
+    implementation 'com.aheaditec.mepisdk:commons:0.1.0'
+    implementation 'com.aheaditec.mepisdk:core:0.1.0'
+    implementation 'com.aheaditec.mepisdk:fsi:0.1.0'
+    implementation 'com.aheaditec.mepisdk:mepi:0.1.0'
+```
+
+#### iOS binaries:
+[Monet's Github repository](https://github.com/monetplus)
+Add following line to Cartfile:
+```
+binary "https://raw.githubusercontent.com/monetplus/MEPiSDK_iOS/master/mepisdk_carthage/Mepi.json" ~> 0.1.0
+```
+
 ### Supported scenarios
 
 #### Status
-MEPi component provides API for getting information required to decide which scenario should be presented to user by integrating application. This API provides information such as availability of CASE mobile, presence of client certificate, availability of biometrics etc. Based on these data, integrating application will decide if:
+MEPi component provides API for getting information required to decide which scenario should be presented to user by integrating application. This API provides information such as availability of CASE mobile, presence of TLS client certificate, availability of biometrics etc. Based on these data, integrating application will decide if:
 - login using CASE mobile can be used
 - activation is required during upcoming login
 - biometrics should be activated and/or used 
@@ -52,15 +104,15 @@ This login scenario consists of 4 stages:
 
 `CMiTP` provides API for creating login requests and processing responses. It does not validate any part of URL except query parameters that are used to serialize data. Opening and receiving URL is the responsibility of an integrating application. `CMiTP` does not restrict nor force (Android) application to use a particular component to receive URL requests from OS.
 
-CASE mobile has its own links that will be used by integrating application and `CMiTP` to send requests to CASE mobile. Integrating application must also setup its links to receive responses from CASE mobile. Before using this login scenario, value of application’s links has to be registered in MEP system.
+CASE mobile has its own links that will be used by integrating application and `CMiTP` to send requests to CASE mobile. Integrating application must also setup its links to receive responses from CASE mobile (see links to official documentation above). Values of application's links are completely arbitrary, as long as they will not collide with values of CASE mobile and are registered in MEP system before using this login scenario. After registration, those links can be passed as redirect URIs.
 
 ##### Methods supporting CM login scenario:
-- `CMiTP`'s extensions on `Swift.URL` and `Uri` with method `appendingQuery()`, `appendQuery()` or `parseQuery()`
+- `CMiTP`'s extensions on `Swift.URL`(iOS) and `Uri`(Android) with method `appendingQuery()`, `appendQuery()` or `parseQuery()`
 - `MEPiCommons.LoginInput`
 - `MEPiCommons.LoginOutput`
 
 #### Login using username password and sms
-If CASE mobile is not available on the device, the integrating application can present the user with a series of forms to enable login by username, password, and SMS code.
+If CASE mobile is not available on the device, or integrating application does not want to enforce usage of CASE mobile identity, integrating application can present the user with a series of traditional forms to enable login by username, password, and SMS code. MEPI SDK will directly process credentials entered by user.
 
 This login scenario consists of 3 stages:
 1. start login session

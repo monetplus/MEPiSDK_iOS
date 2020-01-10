@@ -48,7 +48,7 @@ Add to module's gradle file:
 repositories {
     maven {
         credentials {
-            username "<your username>""
+            username "<your username>"
             password "<your password>"
         }
         url "https://nexus3-public.monetplus.cz/repository/ahead-android-csob-release/"

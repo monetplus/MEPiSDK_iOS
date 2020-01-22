@@ -57,11 +57,14 @@ repositories {
 ```
 Add following gradle dependencies:
 ```
-    implementation 'com.aheaditec.mepisdk:cmi-tp:0.1.0'
-    implementation 'com.aheaditec.mepisdk:commons:0.1.0'
-    implementation 'com.aheaditec.mepisdk:core:0.1.0'
-    implementation 'com.aheaditec.mepisdk:fsi:0.1.0'
-    implementation 'com.aheaditec.mepisdk:mepi:0.1.0'
+    implementation("com.aheaditec.mepisdk:cmi-tp:0.1.3")
+    implementation("com.aheaditec.mepisdk:commons:0.1.3")
+    implementation("com.aheaditec.mepisdk:fsi:0.1.3")
+    implementation("com.aheaditec.mepisdk:mepi:0.1.3")
+    implementation("com.aheaditec.utils:core:1.0.1")
+    implementation 'com.aheaditec.utils:network:2.0.0'
+    implementation 'com.aheaditec.talsec:storage:1.0.1'
+    implementation 'com.aheaditec.talsec:ClientCertificates:1.1.3'
 ```
 
 #### iOS binaries:

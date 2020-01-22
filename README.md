@@ -84,15 +84,17 @@ MEPi component provides API for getting information required to decide which sce
  
 ##### Components & classes supporting status scenario:
 - `MEPi.StatusFactory`
-<details>
-    <summary>Android snippet</summary>
 
-    ```kotlin
-    val retriever = CaseMobileStatusRetriever(application, "cz.csob.smartklic")
-    val statusFactory = StatusFactory(retriever, application)
-    ```
-</details>
+    - Android
+        ```kotlin
+        val retriever = CaseMobileStatusRetriever(application, "cz.csob.smartklic")
+        val statusFactory = StatusFactory(retriever, application)
+        ```
 - `MEPi.Status`
+    - Android
+      ```kotlin
+        val status = statusFactory.getStatus()
+      ```
  
 #### Login using CASE mobile
 It is very common that applications require some form of logging in before a user can use the main functionality. Applications integrating MEPi SDK can rely on CASE identity of the user. Instead of forcing him to enter his credentials, an application can redirect him to CASE mobile application to confirm his new login operation. User is used to CASE mobile environment, so confirming login operation should not be a problem for him.

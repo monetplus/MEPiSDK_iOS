@@ -122,6 +122,22 @@ CASE mobile has its own links that will be used by integrating application and `
 ##### Methods supporting CM login scenario:
 - `CMiTP`'s extensions on `Swift.URL`(iOS) and `Uri`(Android) with method `appendingQuery()`, `appendQuery()` or `parseQuery()`
 - `MEPiCommons.LoginInput`
+    - Android
+      ```kotlin
+            val networkCall = NetworkCall("endpoint")
+            val activation = Activation(networkCall).getInstanceId()
+            val oAuthRequest = OAuthRequest(
+                "state",
+                "redirectUri",
+                "clientId",
+                "scopeParam",
+                "responseType" // "code id_token", "token id_token" or "code"
+            )
+            activation.either({ instanceId ->
+                val loginInput = LoginInput(oAuthRequest, OpenIdConnectRequest(instanceId)
+                ...
+            }, ::handleFailure)
+      ```
 - `MEPiCommons.LoginOutput`
 
 #### Login using username password and sms

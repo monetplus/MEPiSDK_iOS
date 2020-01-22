@@ -84,6 +84,14 @@ MEPi component provides API for getting information required to decide which sce
  
 ##### Components & classes supporting status scenario:
 - `MEPi.StatusFactory`
+<details>
+    <summary>Android snippet</summary>
+
+    ```kotlin
+    val retriever = CaseMobileStatusRetriever(application, "cz.csob.smartklic")
+    val statusFactory = StatusFactory(retriever, application)
+    ```
+</details>
 - `MEPi.Status`
  
 #### Login using CASE mobile

@@ -124,7 +124,7 @@ CASE mobile has its own links that will be used by integrating application and `
 - `MEPiCommons.LoginInput`
     - Android
       ```kotlin
-            val networkCall = NetworkCall("endpoint")
+            val networkCall = NetworkCall("serverUrl")
             val activation = Activation(networkCall).getInstanceId()
             val oAuthRequest = OAuthRequest(
                 "state",

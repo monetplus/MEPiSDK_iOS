@@ -136,7 +136,9 @@ CASE mobile has its own links that will be used by integrating application and `
             activation.either({ instanceId ->
                 val loginInput = LoginInput(oAuthRequest, OpenIdConnectRequest(instanceId)
                 ...
-            }, ::handleFailure)
+            }, { error ->
+                // solve error
+            }
       ```
 - `MEPiCommons.LoginOutput`
 

@@ -84,7 +84,17 @@ MEPi component provides API for getting information required to decide which sce
  
 ##### Components & classes supporting status scenario:
 - `MEPi.StatusFactory`
+
+    - Android
+        ```kotlin
+        val retriever = CaseMobileStatusRetriever(application, "cz.csob.smartklic")
+        val statusFactory = StatusFactory(retriever, application)
+        ```
 - `MEPi.Status`
+    - Android
+      ```kotlin
+        val status = statusFactory.getStatus()
+      ```
  
 #### Login using CASE mobile
 It is very common that applications require some form of logging in before a user can use the main functionality. Applications integrating MEPi SDK can rely on CASE identity of the user. Instead of forcing him to enter his credentials, an application can redirect him to CASE mobile application to confirm his new login operation. User is used to CASE mobile environment, so confirming login operation should not be a problem for him.
@@ -112,6 +122,24 @@ CASE mobile has its own links that will be used by integrating application and `
 ##### Methods supporting CM login scenario:
 - `CMiTP`'s extensions on `Swift.URL`(iOS) and `Uri`(Android) with method `appendingQuery()`, `appendQuery()` or `parseQuery()`
 - `MEPiCommons.LoginInput`
+    - Android
+      ```kotlin
+            val networkCall = NetworkCall("serverUrl")
+            val activation = Activation(networkCall).getInstanceId()
+            val oAuthRequest = OAuthRequest(
+                "state",
+                "redirectUri",
+                "clientId",
+                "scopeParam",
+                "responseType" // "code id_token", "token id_token" or "code"
+            )
+            activation.either({ instanceId ->
+                val loginInput = LoginInput(oAuthRequest, OpenIdConnectRequest(instanceId)
+                ...
+            }, { error ->
+                // solve error
+            }
+      ```
 - `MEPiCommons.LoginOutput`
 
 #### Login using username password and sms
@@ -126,6 +154,46 @@ This login scenario consists of 3 stages:
 
 ##### Components & classes supporting login with credentials scenario:
 - `FSi.FSiLogin`
+    - Android
+      ```kotlin
+        val flCommunicator = NetworkCall("${serverUrl}/mep/fs/fl/cmi/v5/")
+        val authCommunicator = NetworkCall("${serverUrl}/mep/fs/svc/authgtw/authn/")
+        val activation = Activation(NetworkCall("serverUrl"))
+        var instanceId: Either<String, ErrorOutput>? = null
+        if (status.applicationActivated.not()) {
+            instanceId = activation.getInstanceId()
+        }
+        val oAuthRequest = OAuthRequest(
+            "state",
+            "redirectUri",
+            "clientId",
+            "scopeParam",
+            "responseType" // "code id_token", "token id_token" or "code"
+        )
+        val connectRequest = if (instanceId is Either.Success) {
+            OpenIdConnectRequest(instanceId.s)
+        } else {
+            null
+        }
+        val loginInput = LoginInput(oAuthRequest, connectRequest)
+
+        FSiLogin(flCommunicator, authCommunicator).start(
+            loginInput,
+            "language"
+        ).mapEither { scenario ->
+            scenario.selectScenario("s_mobile_authn_un_pwd_sms")
+        }.mapEither { userNameAndPassword ->
+            userNameAndPassword.submit("userName", "password")
+        }.mapEither { sms ->
+            sms.submit("000-000-000")
+        }.mapEither { loginFinish ->
+            loginFinish.get()
+        }.biMap({ loginOutput ->
+            // go to authorization
+        }, { error ->
+            // solve error
+        }
+      ```
 
 #### Activation
 Activation is enrolling process of MEPi SDK. During activation data required for some MEPi SDK features are generated. It has 4 stages:

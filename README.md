@@ -162,7 +162,7 @@ This login scenario consists of 3 stages:
 - `FSi.FSiLogin`
     - Android
       ```kotlin
-        val flCommunicator = NetworkCall("${serverUrl}/mep/fs/fl/cmi/v5/")
+        val flCommunicator = NetworkCall("${serverUrl}/mep/fs/fl/")
         val authCommunicator = NetworkCall("${serverUrl}/mep/fs/svc/authgtw/authn/")
         val activation = Activation(NetworkCall("serverUrl"))
         var instanceId: Either<String, ErrorOutput>? = null

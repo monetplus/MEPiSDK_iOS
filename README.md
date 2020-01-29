@@ -66,7 +66,7 @@ Add the following to your app/build.gradle inside the dependencies section:
     implementation 'com.aheaditec.talsec:storage:$latest_version'
     implementation 'com.aheaditec.talsec:ClientCertificates:$latest_version'
     
-    /PKCS stuff
+    // PKCS stuff
     implementation 'com.madgag.spongycastle:pkix:1.51.0.0'
     implementation 'com.madgag.spongycastle:core:1.51.0.0'
     // JWS stuff

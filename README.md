@@ -55,16 +55,22 @@ repositories {
     }
 }
 ```
-Add following gradle dependencies:
+Add the following to your app/build.gradle inside the dependencies section:
 ```
-    implementation("com.aheaditec.mepisdk:cmi-tp:0.1.3")
-    implementation("com.aheaditec.mepisdk:commons:0.1.3")
-    implementation("com.aheaditec.mepisdk:fsi:0.1.3")
-    implementation("com.aheaditec.mepisdk:mepi:0.1.3")
-    implementation("com.aheaditec.utils:core:1.0.1")
-    implementation 'com.aheaditec.utils:network:2.0.0'
-    implementation 'com.aheaditec.talsec:storage:1.0.1'
-    implementation 'com.aheaditec.talsec:ClientCertificates:1.1.3'
+    implementation("com.aheaditec.mepisdk:cmi-tp:$latest_version")
+    implementation("com.aheaditec.mepisdk:commons:$latest_version")
+    implementation("com.aheaditec.mepisdk:fsi:$latest_version")
+    implementation("com.aheaditec.mepisdk:mepi:$latest_version")
+    implementation("com.aheaditec.utils:core:$latest_version")
+    implementation 'com.aheaditec.utils:network:$latest_version'
+    implementation 'com.aheaditec.talsec:storage:$latest_version'
+    implementation 'com.aheaditec.talsec:ClientCertificates:$latest_version'
+    
+    /PKCS stuff
+    implementation 'com.madgag.spongycastle:pkix:1.51.0.0'
+    implementation 'com.madgag.spongycastle:core:1.51.0.0'
+    // JWS stuff
+    implementation "org.bitbucket.b_c:jose4j:0.6.5"
 ```
 
 #### iOS binaries:

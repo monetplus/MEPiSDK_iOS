@@ -1,3 +1,6 @@
+**v0.1.8**
+* [mepi] - proguard fix, visibility of `BiometricAuthenticationFailedReaction` sealed class members
+
 **v0.1.7**
 * [all] - validation of IDToken added, BE error codes added
 * [cmi-tp] - `Uri.parseQuery()` method requires 2 new parameters, `NetworkCall` and `LoginInput`

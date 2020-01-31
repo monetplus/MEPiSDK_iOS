@@ -1,7 +1,10 @@
+**v1.0.0**
+* added transaction authorization scenario support
+
 **v0.1.4**
  * added support for biometrics to activation
  * added biometric login scenario support
- * added deactivation scenario suppoer
+ * added deactivation scenario support
  
 **v0.1.3**
  * added processing of server error codes

@@ -220,6 +220,22 @@ Activation is enrolling process of MEPi SDK. During activation data required for
 - `MEPi.Status`
 - `MEPi.Activation`
 
+#### Transaction
+Preconditions for this scenario:
+   1. User is logged in and has access token
+   2. User is activated
+   3. User has active transaction identified by mepId
+
+Authorization of transaction has 3 stages:
+1. Initialize transaction in MEP. It responsibility of integrating application or its backend.
+2. Get list of supported autorization method for transaction and select one
+3. Based on selected method:
+    a. For SMS authorization, get SMS OTP from user and send it to MEP
+    b. For Confirmation authorization send confirmation to MEP
+
+##### Components & classes supporting transaction scenario: 
+- `FSi.FSiTransaction`
+
 ### Error handling
 If any operation should fail in MEPi SDK, details about the error are returned to the integrating application. An application can use those data to inform the user about failure and/or write them to logs.
 

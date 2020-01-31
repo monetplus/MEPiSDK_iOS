@@ -1,3 +1,6 @@
+**v1.0.0**
+* [fsi] - `FSiTransaction` class and others added, transaction flow support
+
 **v0.1.8**
 * [mepi] - proguard fix, visibility of `BiometricAuthenticationFailedReaction` sealed class members
 

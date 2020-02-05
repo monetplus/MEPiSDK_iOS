@@ -1,3 +1,6 @@
+**v1.0.1**
+* fixed dependency on storage framework build with older swift
+
 **v1.0.0**
 * added transaction authorization scenario support
 

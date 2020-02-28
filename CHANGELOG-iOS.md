@@ -1,3 +1,9 @@
+**v1.0.3**
+* changed deployment target of CMi TP from 13.2 to 11.0 to 
+
+**v1.0.2**
+* added validation of certificate validity period to StatusFactory
+
 **v1.0.1**
 * fixed dependency on storage framework build with older swift
 

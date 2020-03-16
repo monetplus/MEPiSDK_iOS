@@ -1,3 +1,6 @@
+**v1.1.0**
+* added support for session fixation by using login access tokens
+
 **v1.0.3**
 * changed deployment target of CMi TP from 13.2 to 11.0 to 
 

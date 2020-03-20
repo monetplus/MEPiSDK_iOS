@@ -1,3 +1,7 @@
+**v1.2.0**
+* added support for static certificates
+* added support for deactivation reason
+
 **v1.1.0**
 * added support for session fixation by using login access tokens
 

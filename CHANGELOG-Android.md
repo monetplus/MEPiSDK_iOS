@@ -1,3 +1,15 @@
+**v1.2.0**
+* [fsi] - `operation mode` removed from Transaction select scenario (sms)
+* [fsi] - session fixation, login access token added to `ProcessResponse`, login access token used in Authorization header
+* [mepi] - new version of library ClientCertificates, supports default (pkcs12) client authentication
+
+**v1.1.1**
+* [fsi] - Bug fixed in `SelectScenarioRequest` with SMS
+
+**v1.1.0**
+* [core] - reworked as java library
+* [commons] - reworked as java library
+
 **v1.0.0**
 * [fsi] - `FSiTransaction` class and others added, transaction flow support
 

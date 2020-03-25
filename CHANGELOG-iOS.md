@@ -1,3 +1,6 @@
+**v1.2.1**
+* fixed dependency on client certificates
+
 **v1.2.0**
 * added support for static certificates
 * added support for deactivation reason

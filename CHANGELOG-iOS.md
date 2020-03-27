@@ -1,12 +1,19 @@
+**v1.3.0**
+* added support for requested claims from open id connect (DI4R-3390)
+    * should be used for sending instance id
+* updated build setting of frameworks to support module stability and usage of App-Extension-Safe APIs
+* removed dependency on `Talsec.framework`
+* added dependency on `CoreUtils.framework`
+
 **v1.2.1**
 * fixed dependency on client certificates
 
 **v1.2.0**
-* added support for static certificates
-* added support for deactivation reason
+* added support for static certificates (DI4R-3159)
+* added support for deactivation reason (DI4R-1978)
 
 **v1.1.0**
-* added support for session fixation by using login access tokens
+* added support for session fixation by using login access tokens (DI4R-2669)
 
 **v1.0.3**
 * changed deployment target of CMi TP from 13.2 to 11.0 to 

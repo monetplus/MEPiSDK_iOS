@@ -1,6 +1,10 @@
+**v1.3.1**
+* used `value` field in serialized `claims` JSON, when array with one item is used to create ClaimContent instance
+
 **v1.3.0**
 * added support for requested claims from open id connect (DI4R-3390)
-    * should be used for sending instance id
+    * see classes `Claims`, `ClaimContent`
+    * should be used for sending instance id 
 * updated build setting of frameworks to support module stability and usage of App-Extension-Safe APIs
 * removed dependency on `Talsec.framework`
 * added dependency on `CoreUtils.framework`

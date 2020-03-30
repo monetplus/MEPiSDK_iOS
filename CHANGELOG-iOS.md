@@ -1,3 +1,6 @@
+**v1.3.2**
+* removed `Talsec.framework` from published package
+
 **v1.3.1**
 * used `value` field in serialized `claims` JSON, when array with one item is used to create ClaimContent instance
 

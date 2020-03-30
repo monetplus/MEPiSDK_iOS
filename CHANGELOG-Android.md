@@ -1,3 +1,13 @@
+**v2.0.0**
+* [all] - only service path used in SDK. Use as follows:
+          domain + /mep/fs/fl -> federated login
+          domain + /mep/fs/svc/authgtw/authn -> authGTW FL
+          domain + /mep/fs/svc/authgtw/authz -> authGTW FTA
+          domain + /mep/fs/svc/authgtw-cm -> authGTW CM
+* [mepi] - `DeactivationReason` added, representing reason of deactivation call, `DeactivationRequest` modified
+* [mepi] - `Deactivation.deactivate` has 2 new parameters, mandatory `DeactivationReason` and optional `sessionId`
+* [commons] - Claims added to `OpenIdConnectRequest`, utility method for creating Claims added `Claims.createCmiInstanceIdClaims(instanceId)`.
+
 **v1.2.0**
 * [fsi] - `operation mode` removed from Transaction select scenario (sms)
 * [fsi] - session fixation, login access token added to `ProcessResponse`, login access token used in Authorization header

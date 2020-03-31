@@ -1,9 +1,12 @@
+**v2.0.1**
+* fixed obfuscation 
+
 **v2.0.0**
 * [all] - only service path used in SDK. Use as follows:
-          domain + /mep/fs/fl -> federated login
-          domain + /mep/fs/svc/authgtw/authn -> authGTW FL
-          domain + /mep/fs/svc/authgtw/authz -> authGTW FTA
-          domain + /mep/fs/svc/authgtw-cm -> authGTW CM
+    * domain + /mep/fs/fl -> federated login
+    * domain + /mep/fs/svc/authgtw/authn -> authGTW FL
+    * domain + /mep/fs/svc/authgtw/authz -> authGTW FTA
+    * domain + /mep/fs/svc/authgtw-cm -> authGTW CM
 * [mepi] - `DeactivationReason` added, representing reason of deactivation call, `DeactivationRequest` modified
 * [mepi] - `Deactivation.deactivate` has 2 new parameters, mandatory `DeactivationReason` and optional `sessionId`
 * [commons] - Claims added to `OpenIdConnectRequest`, utility method for creating Claims added `Claims.createCmiInstanceIdClaims(instanceId)`.

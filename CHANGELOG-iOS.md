@@ -1,3 +1,7 @@
+**v2.0.0**
+* fixed issue with storing client certificate after succesful activation (previously activated instances will stop working)
+* built with Xcode 11.4
+
 **v1.3.2**
 * removed `Talsec.framework` from published package
 

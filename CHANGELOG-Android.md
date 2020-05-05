@@ -1,3 +1,9 @@
+**v2.1.1**
+* [fsi] - fixed support for login access tokens in new Sms' methods
+
+**v2.1.0**
+* [fsi] - Added `cancel()` and `resendSms()` methods to Sms class.
+
 **v2.0.1**
 * fixed obfuscation 
 

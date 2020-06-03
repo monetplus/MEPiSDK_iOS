@@ -1,5 +1,8 @@
+**v2.2.1**
+* added property `actionURL` to `TransactionScenario` class
+
 **v2.2.0**
-* added cancel and resend method to FSi login process (class `SMS`)
+* added `cancel` and `resend` methods to FSi login process (class `SMS`)
 
 **v2.0.0**
 * fixed issue with storing client certificate after succesful activation (previously activated instances will stop working)

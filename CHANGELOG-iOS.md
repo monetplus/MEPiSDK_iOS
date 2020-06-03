@@ -1,5 +1,6 @@
 **v2.2.1**
 * added property `actionURL` to `TransactionScenario` class
+* built with Xcode 11.5
 
 **v2.2.0**
 * added `cancel` and `resend` methods to FSi login process (class `SMS`)

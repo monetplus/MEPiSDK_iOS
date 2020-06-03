@@ -1,3 +1,6 @@
+**v2.1.2**
+* [fsi] - Added `actionUrl` and `wysiwys` attributes to `TransactionScenario`
+
 **v2.1.1**
 * [fsi] - fixed support for login access tokens in new Sms' methods
 

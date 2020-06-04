@@ -235,6 +235,63 @@ Authorization of transaction has 3 stages:
 
 ##### Components & classes supporting transaction scenario: 
 - `FSi.FSiTransaction`
+    - Android
+    ```kotlin
+    ```
+    - iOS
+    ```swift
+    let accessToken = ... // token from login
+    let mepId = ... // mep id from transaction registration
+    guard let communicator = CommunicatorFactory.createForAuthGtwFta() else { return }
+
+    do {
+    let trx = FSiTransaction(
+                authGatewayFederatedTransactionAuthorizationCommunicator: communicator, 
+                accessToken: accessToken
+              )
+    
+    let lang = "cs" // BE must support trx templates for selected language
+    let trxResult = trx.startTransaction(mepId: mepId, language: lang) 
+    
+    ```
+- `FSi.TransactionScenario`
+    - Android
+    ```kotlin
+    ```
+    - iOS
+    ```swift
+    let scenario = try trxResult.get() // or switch on Result.success/Result.failure
+    let requiredScenario = "..."
+    guard scenario.scenariosId.contains(requiredScenario) else {
+        failed(message: "Does not support '...' scenario.")
+        return
+    }
+    ```
+- `FSi.TransactionSMS`
+    - Android
+    ```kotlin
+    ```
+    - iOS
+    ```swift
+    let requiredScenario = "s_mobile_authz_sms"
+    let smsResult = scenario.selectSMS(scenario: requiredScenario)
+    let sms = try confirmationResult.get()
+    let smsCode = ... // show UI with SMS input field & wait user input
+    let result = sms.submit(sms: smsCode)
+    try result.get()
+    ```
+- `FSi.TransactionConfirmation`
+    - Android
+    ```kotlin
+    ```
+    - iOS
+    ```swift
+    let requiredScenario = "s_mobile_authz_none"
+    let confirmationResult = scenario.selectConfirmation(scenario: requiredScenario)
+    let confirmation = try confirmationResult.get()
+    let result = confirmation.confirm()
+    try result.get()
+    ```
 
 ### Error handling
 If any operation should fail in MEPi SDK, details about the error are returned to the integrating application. An application can use those data to inform the user about failure and/or write them to logs.

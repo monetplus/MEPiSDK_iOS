@@ -90,16 +90,24 @@ MEPi component provides API for getting information required to decide which sce
  
 ##### Components & classes supporting status scenario:
 - `MEPi.StatusFactory`
-
     - Android
         ```kotlin
         val retriever = CaseMobileStatusRetriever(application, "cz.csob.smartklic")
         val statusFactory = StatusFactory(retriever, application)
         ```
+    - iOS
+    ```swift
+    let cmBundleId = "cz.csob.smartklic"
+    let statusFactory = StatusFactory(urlChecker: UIApplication.shared, caseMobileBundleId: cmBundleId)
+    ```
 - `MEPi.Status`
     - Android
       ```kotlin
         val status = statusFactory.getStatus()
+      ```
+      ```swift
+      let statusResult = statusFactory.getStatus()
+      let status = statusResult.get()
       ```
  
 #### Login using CASE mobile
@@ -146,6 +154,19 @@ CASE mobile has its own links that will be used by integrating application and `
                 // solve error
             }
       ```
+     - iOS
+     ```swift
+     let responseType = ... // "code id_token", "token id_token" or "code"
+     let instanceId = ... // instanceId from activation,
+     let scopes = ... // requested scopes
+     let state = ... // custom value from application
+     let redirectUri = ... // uri to receive response    
+     let clientId = ... // client id of application
+     let oAuthRequest = OAuthRequest(state: state, redirectUri: redirectUri, clientId: clientid, scope: scopes, responseType: responseType)
+     let claims = Claims(idTokenClaims: ["cmiInstanceId": ClaimContent(values: [instanceId])], userInfoClaims: nil)
+     let openIdConnectRequest = OpenIDConnectRequest(claims: claims)
+     let loginInput = LoginInput(oAuthRequest: oAuthRequest, openIDRequest: openIdConnectRequest)
+     ```
 - `MEPiCommons.LoginOutput`
 
 #### Login using username password and sms
@@ -200,6 +221,28 @@ This login scenario consists of 3 stages:
             // solve error
         }
       ```
+     - iOS 
+     ```swift
+     guard let federatedLoginCommunicator = CommunicatorFactory.createForFederatedLogin() else { return }
+     guard let authGTWFLCommunicator = CommunicatorFactory.createForAuthGtwFl() else { return }
+     let fsiLogin = FSiLogin.init(federatedLoginCommunicator: federatedLoginCommunicator,
+                                  authGatewayFederatedLoginCommunicator: authGTWFLCommunicator)
+     let scenarioResult = fsiLogin.startLogin(loginInput: loginInput, language: "cs")
+     let scenario = try scenarioResult.get()
+     
+     let requiredScenario = "s_mobile_authn_un_pwd_sms"
+     guard scenario.scenariosId.contains(requiredScenario) else { return }
+
+     let userNamePasswordResult = scenario.select(scenarioId: requiredScenario)
+     let userNameAndPassword = try userNamePasswordResult.get()
+     let smsResult = userNameAndPassword.submit(userName: userName, password: password)
+     let sms = try smsResult.get()
+     
+     let loginFinishResult = sms.submit(sms: smsCode)
+     let loginFinish = try loginFinishResult.get()
+     let loginOutputResult = loginFinish.get()
+     let loginOutput = try loginOutputResult.get()
+     ```
 
 #### Activation
 Activation is enrolling process of MEPi SDK. During activation data required for some MEPi SDK features are generated. It has 4 stages:
@@ -219,6 +262,22 @@ Activation is enrolling process of MEPi SDK. During activation data required for
 - `MEPi.StatusFactory`
 - `MEPi.Status`
 - `MEPi.Activation`
+    - Android
+    ```kotlin
+    ```
+    - iOS
+    ```swift
+    guard let communicator = CommunicatorFactory.createForAuthGtwCmWithStaticClientCert() else { return }
+    let activation = Activation.init(authGatewayCaseMobileCommunicator: communicator)
+    let instanceIdResult = activation.getInstanceId()
+    let instanceId = instanceIdResult.get()
+    let clientId = ... // client id of application
+    let accessToken = ... // token from login
+    let result = activation.issueCertificates(accessToken: accessToken,
+                                              clientId: clientId,
+                                              instanceId: instanceId,
+                                              biometricPrompt: "Gimme your biometrics!")
+    ```
 
 #### Transaction
 Preconditions for this scenario:

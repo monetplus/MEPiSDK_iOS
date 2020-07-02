@@ -1,3 +1,7 @@
+**v3.0.0**
+* [all] revised error handling in all libraries
+* [commons] revised MEPiError enum
+
 **v2.1.2**
 * [fsi] - Added `actionUrl` and `wysiwys` attributes to `TransactionScenario`
 

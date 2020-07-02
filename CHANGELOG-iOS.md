@@ -1,3 +1,7 @@
+**v3.0.0**
+* revised error handling in all libraries
+* revised MEPiError enum
+
 **v2.2.1**
 * added property `actionURL` to `TransactionScenario` class
 * built with Xcode 11.5

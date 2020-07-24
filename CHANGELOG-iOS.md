@@ -1,3 +1,10 @@
+**v4.0.0**
+* added support for encrypting communication with CM
+    * added `ProtectionMode` enum (encrypted mode requires value of CM bundle id)
+    * added static property `URL.cmiProtectionMode: ProtectionMode` to enable/disable protection of url parameters in URLs used for communication with CM.
+* changed return type of `URL.appendingQuery()` from `URL` to `Result<URL, ErrorOutput>`
+* added return type of `URL.appendQuery()` of `ErrorOutput`
+
 **v3.0.0**
 * revised error handling in all libraries
 * revised MEPiError enum

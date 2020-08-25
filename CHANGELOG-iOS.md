@@ -1,3 +1,7 @@
+**v4.0.1**
+* [commons] Added `OtpExpired` to `MEPiError` enum
+* [fsi] Added error mapping for expired SMS error 
+
 **v4.0.0**
 * added support for encrypting communication with CM
     * added `ProtectionMode` enum (encrypted mode requires value of CM bundle id)

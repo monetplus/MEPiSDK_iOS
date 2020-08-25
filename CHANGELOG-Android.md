@@ -1,3 +1,16 @@
+**v3.0.4**
+* [commons] Added `OtpExpired` to `MEPiError` enum
+* [fsi] Added error mapping for expired SMS error 
+
+**v3.0.3**
+* [mepi] - BIO deactivation `MEPiError` enum changed from `MethodDeactivated` to `InstanceDeactivated`
+
+**v3.0.2**
+* [mepi] - fixed bug in check for available certificates in `Deactivation.deactivate()` method
+
+**v3.0.1**
+* [mepi] - dependency version changed - ClientCertificates:1.2.1
+
 **v3.0.0**
 * [all] revised error handling in all libraries
 * [commons] revised MEPiError enum

@@ -1,3 +1,20 @@
+**v4.1.0**
+* [all] built with Xcode12
+* [all] updated TalsecCertificates dependency with slightly modified API
+```
+if let definitionData = Data(base64Encoded: Environment.definition) {
+    
+    let definition = try Definition(data: definitionData)
+    let talsec = TalsecCertificates(definition: definition,
+                                    logger: Logger.logger,
+                                    tag: Environment.storageSuiteName,
+                                    groupName: nil,
+                                    supportSimulator: true
+    )
+}
+```
+* [commons] fixed parsing of optional OAuth error parameter
+
 **v4.0.1**
 * [commons] Added `OtpExpired` to `MEPiError` enum
 * [fsi] Added error mapping for expired SMS error 

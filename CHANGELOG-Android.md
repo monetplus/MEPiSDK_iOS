@@ -1,3 +1,6 @@
+**v3.0.5**
+* [fsi] - Fixed optionality of `actionUrl` in `GetAvailableScenariosResponse`
+
 **v3.0.4**
 * [commons] Added `OtpExpired` to `MEPiError` enum
 * [fsi] Added error mapping for expired SMS error 

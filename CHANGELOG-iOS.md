@@ -1,3 +1,6 @@
+**v4.1.1**
+* [mepi] Fixed value returned from biometric login when prompt dialog is dismissed (DI4R-1819 a DI4R-1806)
+
 **v4.1.0**
 * [all] built with Xcode12
 * [all] updated TalsecCertificates dependency with slightly modified API

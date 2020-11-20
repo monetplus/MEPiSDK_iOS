@@ -1,3 +1,14 @@
+**v3.1.0**
+* [commons] Added `ScopesVerificationFailed` to MEPiError enum
+* [commons] Added mapping from OAuth error for `ScopesVerificationFailed`
+* [mepi] Added mapping from server error code to `ScopesVerificationFailed`
+* [commons] Added `Http(code)` to MEPiError enum
+* [commons] Added processing of http errors from network calls
+
+**v3.0.6**
+* [cmi-tp] Fixed enhanced status validation
+* [cmi-tp] Added timeout for enhanced status response
+
 **v3.0.5**
 * [fsi] - Fixed optionality of `actionUrl` in `GetAvailableScenariosResponse`
 

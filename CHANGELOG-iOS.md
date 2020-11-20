@@ -1,3 +1,10 @@
+**v4.2.0**
+* [commons] Added ScopesVerificationFailed to MEPiError enum
+* [commons] Added mapping from OAuth error for ScopesVerificationFailed
+* [mepi] Added mapping from server error code to ScopesVerificationFailed
+* [commons] Added Http(code) to MEPiError enum
+* [commons] Added processing of http errors from network calls
+
 **v4.1.2**
 * [mepi] Fixed value returned from biometric login when prompt dialog is dismissed (DI4R-1819 a DI4R-1806)
 

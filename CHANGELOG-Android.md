@@ -1,3 +1,9 @@
+**v3.1.2**
+* [mepi] Fixed crashed caused by usage of invalidated key during biometric signature
+
+**v3.1.1**
+* [fsi] Fixed mappings of codes to MEPiErrors in `AuthGtwFTAErrorResponse`
+
 **v3.1.0**
 * [commons] Added `ScopesVerificationFailed` to MEPiError enum
 * [commons] Added mapping from OAuth error for `ScopesVerificationFailed`

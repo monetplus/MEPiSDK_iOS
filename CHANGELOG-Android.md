@@ -1,3 +1,8 @@
+**v3.2.0**
+* [all] updated kotlin dependencies to:
+   * `org.jetbrains.kotlinx:kotlinx-serialization-json:1.0.1`
+   * `org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.4.21`
+
 **v3.1.2**
 * [mepi] Fixed crashed caused by usage of invalidated key during biometric signature
 

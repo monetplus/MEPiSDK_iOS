@@ -4,28 +4,28 @@
 import PackageDescription
 
 private class Versions {
-    static let CMiTP = "5.0.3"
+    static let CMiTP = "5.0.4"
     static let ClientCertificates = "241ee1e578c558a3a82b7a37f1b9cb6b5576f7da"
-    static let CommunicatorFramework = "3.1.0"
+    static let CommunicatorFramework = "3.1.1"
     static let CoreUtilities = "2.0.0"
-    static let FSi = "5.0.3"
+    static let FSi = "5.0.4"
     static let JOSESwift = "2.0.0"
-    static let MEPi = "5.0.3"
-    static let MEPiCommons = "5.0.3"
+    static let MEPi = "5.0.4"
+    static let MEPiCommons = "5.0.4"
     static let SecureStorage = "8ca51f220b2194c5e5aa5c02f48c35c4a5a4637f"
     static let TalsecCertificatesFramework = "6.1.0"
     static let OpenSSL = "1.1.180"
 }
 
 private class Checksums {
-    static let CMiTP = "8ab79ec2485a192e8fc3f66f5b7942891c0b9b3019653c1d3ced5b3b44cbf4b1"
+    static let CMiTP = "1986c53441b885cc7b4f28cadb16229bc148264250b4e49c7677a2b8a9b55c29"
     static let ClientCertificates = "ddf896437346014d7d8e54df3fecb5c0917cc494f0e704cef0fa4ef8d90aee45"
-    static let CommunicatorFramework = "8a9f8ed4d9140c1db69f622e16fab4bc9b50b8fc2c3a4cb85fee6e04a12051ce"
+    static let CommunicatorFramework = "5c54980f16fbb03755de2fe2740e175490c3953f58aa6fe999600e7c203d9e9b"
     static let CoreUtilities = "3d993713476d9ff11c6955842617b624ef29772170f58d71e1863cdd38b6dcef"
-    static let FSi = "6e97fb815d4b8e349c4c2ca11d746d3d80e6456e313911f5a79146e76c23ba36"
+    static let FSi = "49a1d620f24b69448ae302fd8a510f88fbb8d2c2c8c760acad66f9b0b5247749"
     static let JOSESwift = "4f2f51ad0df5f2d71fe7e1dbfdf9b7b69153752fb2cf6eca26183e076539299b"
-    static let MEPi = "9cddf7b0d791472d6497607334a658606430fb08ef22453d3dae0bec24842aba"
-    static let MEPiCommons = "fbef396e44a43b6aa30443a2321154136b823098586a6800ab81c835835f5698"
+    static let MEPi = "967a3e0b70b132a835abb2198ebc7f6591e067a2191638da1dbec31cac4da82d"
+    static let MEPiCommons = "d1a0add5933e1d7e25e0b82937383cb7f43516ef6a3f35fc30f51a72cb19a7d3"
     static let SecureStorage = "1c6f9868fc57a45035b3d040a57cc10213483bbb69607f678bf2b593b644fa1f"
     static let TalsecCertificatesFramework = "806548f481ed5548d59ae4d3814b64533cb4a7b23734c3b1c8597662289fa4a9"
     static let OpenSSL = "dbb3824e1f5bd08bac4f40d6dcd311c67459b26b5b595abe2855d34409121262"

@@ -1,3 +1,6 @@
+**v3.2.1**
+* [commons] added error code to mappings for BE codes without "0" prefix (DI4RID-2297)
+
 **v3.2.0**
 * [all] updated kotlin dependencies to:
    * `org.jetbrains.kotlinx:kotlinx-serialization-json:1.0.1`

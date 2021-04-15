@@ -1,3 +1,30 @@
+**v7.0.1**
+* [mepi] fixed issue with unavailable keys after biometry set modification (DI4RID-2522)
+ 
+**v7.0.0**
+* [webview] added revised CMiWebView framework to package
+
+**v6.0.0**
+* [all] fixed slow evaluation of server certificates during pinning (DI4RID-2483)
+* [all] updated TalsecCertificatesFramework dependency to 7.0.0
+
+**v5.0.4**
+* [all] updated CommunicatorFramework dependency to 3.1.1
+
+**v5.0.3**
+* [all] same as 5.0.2, just released automatically
+
+**v5.0.2**
+* [commons] added error code to mappings for BE codes without "0" prefix (DI4RID-2297)
+
+**v5.0.1**
+* [cm] added error code for CASE mobile
+
+**v5.0.0**
+* [all] migrated to Swift Package (binary targets from xcframeworks)
+* [all] renamed `Communicator` to `CommunicatorFramework`
+* [all] renamed `TalsecCertificates` to `TalsecCertificatesFramework`
+
 **v4.2.0**
 * [commons] Added ScopesVerificationFailed to MEPiError enum
 * [commons] Added mapping from OAuth error for ScopesVerificationFailed

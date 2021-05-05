@@ -1,3 +1,8 @@
+**v8.0.0**
+* [webview] enabled build for distribution
+* [mepi] revised reaction to error in deactivation. Lib will try to remove both certificates now.
+* [commons] removed `federatedLoginCommunicator` parameter from `LoginOutput.exchangeCodeForToken()` method
+
 **v7.0.1**
 * [mepi] fixed issue with unavailable keys after biometry set modification (DI4RID-2522)
  

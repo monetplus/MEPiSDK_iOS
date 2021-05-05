@@ -1,3 +1,6 @@
+v3.3.0
+* added alternative method for unlocking biometric keys to `UnlockKeyWrapper` (DI4RID-2571)
+
 **v3.2.1**
 * [commons] added error code to mappings for BE codes without "0" prefix (DI4RID-2297)
 

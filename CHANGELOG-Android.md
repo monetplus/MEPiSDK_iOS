@@ -1,4 +1,7 @@
-v3.3.0
+**v3.3.1**
+* added 20 min. clock skew tolerance to ID Token expiration validation (DI4RID-2565)
+
+**v3.3.0**
 * added alternative method for unlocking biometric keys to `UnlockKeyWrapper` (DI4RID-2571)
 
 **v3.2.1**

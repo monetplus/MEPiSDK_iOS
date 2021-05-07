@@ -1,3 +1,6 @@
+**v8.0.1**
+* added 20 min. clock skew tolerance to ID Token expiration validation (DI4RID-2565)
+
 **v8.0.0**
 * [webview] enabled build for distribution
 * [mepi] revised reaction to error in deactivation. Lib will try to remove both certificates now.

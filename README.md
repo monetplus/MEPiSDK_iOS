@@ -32,6 +32,8 @@ Nevertheless, in general, non-technical discussions those two terms can be used 
 4. [Error handling](#error-handling)
 
 ### Components
+![MEPi SDK Components](https://raw.githubusercontent.com/monetplus/MEPiSDK_iOS/readme_update/docs/img/comp_mepi_sdk.png "MEPi SDK Components")
+
 - MEPi - provides status, activation, deactivation, biometric login scenarios
 - FSi - provides authentication and authorization from integrating native mobile application
 - CMi - provides authentication and authorization using CASE mobile application

@@ -36,6 +36,7 @@ Nevertheless, in general, non-technical discussions those two terms can be used 
 - FSi - provides authentication and authorization from integrating native mobile application
 - CMi - provides authentication and authorization using CASE mobile application
 - MEPi Commons - provides common logic used in other components
+- CMiWebView - provides authentication and authorization using web page (iOS only)
 
 ### Integration to project
 Component of MEPi SDK are published to online repositories. Integrating application can either use dependencies directly from repository or download binaries and use them as local dependencies.
@@ -57,30 +58,54 @@ repositories {
 ```
 Add the following to your app/build.gradle inside the dependencies section:
 ```
-    implementation("com.aheaditec.mepisdk:cmi-tp:$latest_version")
-    implementation("com.aheaditec.mepisdk:commons:$latest_version")
-    implementation("com.aheaditec.mepisdk:fsi:$latest_version")
-    implementation("com.aheaditec.mepisdk:mepi:$latest_version")
-    implementation("com.aheaditec.utils:core:$latest_version")
-    implementation 'com.aheaditec.utils:network:$latest_version'
-    implementation 'com.aheaditec.talsec:storage:$latest_version'
-    implementation 'com.aheaditec.talsec:ClientCertificates:$latest_version'
-    
-    // PKCS stuff
-    implementation 'com.madgag.spongycastle:pkix:1.51.0.0'
-    implementation 'com.madgag.spongycastle:core:1.51.0.0'
-    // JWS stuff
-    implementation "org.bitbucket.b_c:jose4j:0.6.5"
+implementation("com.aheaditec.mepisdk:cmi-tp:$latest_version")
+implementation("com.aheaditec.mepisdk:commons:$latest_version")
+implementation("com.aheaditec.mepisdk:fsi:$latest_version")
+implementation("com.aheaditec.mepisdk:mepi:$latest_version")
+implementation("com.aheaditec.utils:core:$latest_version")
+implementation 'com.aheaditec.utils:network:$latest_version'
+implementation 'com.aheaditec.talsec:storage:$latest_version'
+implementation 'com.aheaditec.talsec:ClientCertificates:$latest_version'
+
+// PKCS stuff
+implementation 'com.madgag.spongycastle:pkix:1.51.0.0'
+implementation 'com.madgag.spongycastle:core:1.51.0.0'
+// JWS stuff
+implementation "org.bitbucket.b_c:jose4j:0.6.5"
 ```
 
 #### iOS binaries:
-[Monet's Github repository](https://github.com/monetplus)
+[Monet's Github repository (SPM)](https://github.com/monetplus)
+Add following SPM dependency to Xcode project or Package.swift file:
+```
+{
+    "package": "MEPiSDK",
+    "repositoryURL": "git@github.com:monetplus/MEPiSDK_iOS.git",
+    "state": {
+        "branch": null,
+        "revision": "<<latest_revision>>",
+        "version": "<<latest_version>>"
+    }
+},
+```
+Deprecated:
 Add following line to Cartfile:
 ```
 binary "https://raw.githubusercontent.com/monetplus/MEPiSDK_iOS/master/mepisdk_carthage/Mepi.json" ~> 0.1.0
 ```
 
 ### Supported scenarios
+MEPi SDK supports following scenarios:
+- Status
+- Login using CASE mobile
+- Login using username, password and SMS
+- Login using webview
+- Activation
+- Transaction using SMS
+- Transaction confirmation
+- Transaction using webview
+
+Following sections provide detailed description of these scenarios.
 
 #### Status
 MEPi component provides API for getting information required to decide which scenario should be presented to user by integrating application. This API provides information such as availability of CASE mobile, presence of TLS client certificate, availability of biometrics etc. Based on these data, integrating application will decide if:
@@ -96,19 +121,20 @@ MEPi component provides API for getting information required to decide which sce
         val statusFactory = StatusFactory(retriever, application)
         ```
     - iOS
-    ```swift
-    let cmBundleId = "cz.csob.smartklic"
-    let statusFactory = StatusFactory(urlChecker: UIApplication.shared, caseMobileBundleId: cmBundleId)
-    ```
+        ```swift
+        let cmBundleId = "cz.csob.smartklic"
+        let statusFactory = StatusFactory(urlChecker: UIApplication.shared, caseMobileBundleId: cmBundleId)
+        ```
 - `MEPi.Status`
     - Android
-      ```kotlin
+        ```kotlin
         val status = statusFactory.getStatus()
-      ```
-      ```swift
-      let statusResult = statusFactory.getStatus()
-      let status = statusResult.get()
-      ```
+        ```
+    - iOS
+        ```swift
+        let statusResult = statusFactory.getStatus()
+        let status = statusResult.get()
+        ```
  
 #### Login using CASE mobile
 It is very common that applications require some form of logging in before a user can use the main functionality. Applications integrating MEPi SDK can rely on CASE identity of the user. Instead of forcing him to enter his credentials, an application can redirect him to CASE mobile application to confirm his new login operation. User is used to CASE mobile environment, so confirming login operation should not be a problem for him.
@@ -137,39 +163,39 @@ CASE mobile has its own links that will be used by integrating application and `
 - `CMiTP`'s extensions on `Swift.URL`(iOS) and `Uri`(Android) with method `appendingQuery()`, `appendQuery()` or `parseQuery()`
 - `MEPiCommons.LoginInput`
     - Android
-      ```kotlin
-            val networkCall = NetworkCall("serverUrl")
-            val activation = Activation(networkCall).getInstanceId()
-            val oAuthRequest = OAuthRequest(
-                "state",
-                "redirectUri",
-                "clientId",
-                "scopeParam",
-                "responseType" // "code id_token", "token id_token" or "code"
-            )
-            activation.either({ instanceId ->
-                val loginInput = LoginInput(oAuthRequest, OpenIdConnectRequest(instanceId)
-                ...
-            }, { error ->
-                // solve error
-            }
-      ```
+        ```kotlin
+        val networkCall = NetworkCall("serverUrl")
+        val activation = Activation(networkCall).getInstanceId()
+        val oAuthRequest = OAuthRequest(
+            "state",
+            "redirectUri",
+            "clientId",
+            "scopeParam",
+            "responseType" // "code id_token", "token id_token" or "code"
+        )
+        activation.either({ instanceId ->
+            val loginInput = LoginInput(oAuthRequest, OpenIdConnectRequest(instanceId)
+            ...
+        }, { error ->
+            // solve error
+              }
+        ```
      - iOS
-     ```swift
-     let responseType = ... // "code id_token", "token id_token" or "code"
-     let instanceId = ... // instanceId from activation,
-     let scopes = ... // requested scopes
-     let state = ... // custom value from application
-     let redirectUri = ... // uri to receive response    
-     let clientId = ... // client id of application
-     let oAuthRequest = OAuthRequest(state: state, redirectUri: redirectUri, clientId: clientid, scope: scopes, responseType: responseType)
-     let claims = Claims(idTokenClaims: ["cmiInstanceId": ClaimContent(values: [instanceId])], userInfoClaims: nil)
-     let openIdConnectRequest = OpenIDConnectRequest(claims: claims)
-     let loginInput = LoginInput(oAuthRequest: oAuthRequest, openIDRequest: openIdConnectRequest)
-     ```
+        ```swift
+        let responseType = ... // "code id_token", "token id_token" or "code"
+        let instanceId = ... // instanceId from activation,
+        let scopes = ... // requested scopes
+        let state = ... // custom value from application
+        let redirectUri = ... // uri to receive response    
+        let clientId = ... // client id of application
+        let oAuthRequest = OAuthRequest(state: state, redirectUri: redirectUri, clientId: clientid, scope: scopes, responseType: responseType)
+        let claims = Claims(idTokenClaims: ["cmiInstanceId": ClaimContent(values: [instanceId])], userInfoClaims: nil)
+        let openIdConnectRequest = OpenIDConnectRequest(claims: claims)
+        let loginInput = LoginInput(oAuthRequest: oAuthRequest, openIDRequest: openIdConnectRequest)
+        ```
 - `MEPiCommons.LoginOutput`
 
-#### Login using username password and sms
+#### Login using username, password and sms
 If CASE mobile is not available on the device, or integrating application does not want to enforce usage of CASE mobile identity, integrating application can present the user with a series of traditional forms to enable login by username, password, and SMS code. MEPI SDK will directly process credentials entered by user.
 
 This login scenario consists of 3 stages:
@@ -182,7 +208,7 @@ This login scenario consists of 3 stages:
 ##### Components & classes supporting login with credentials scenario:
 - `FSi.FSiLogin`
     - Android
-      ```kotlin
+        ```kotlin
         val flCommunicator = NetworkCall("${serverUrl}/mep/fs/fl/")
         val authCommunicator = NetworkCall("${serverUrl}/mep/fs/svc/authgtw/authn/")
         val activation = Activation(NetworkCall("serverUrl"))
@@ -203,7 +229,7 @@ This login scenario consists of 3 stages:
             null
         }
         val loginInput = LoginInput(oAuthRequest, connectRequest)
-
+        
         FSiLogin(flCommunicator, authCommunicator).start(
             loginInput,
             "language"
@@ -220,29 +246,35 @@ This login scenario consists of 3 stages:
         }, { error ->
             // solve error
         }
-      ```
+        ```
      - iOS 
-     ```swift
-     guard let federatedLoginCommunicator = CommunicatorFactory.createForFederatedLogin() else { return }
-     guard let authGTWFLCommunicator = CommunicatorFactory.createForAuthGtwFl() else { return }
-     let fsiLogin = FSiLogin.init(federatedLoginCommunicator: federatedLoginCommunicator,
-                                  authGatewayFederatedLoginCommunicator: authGTWFLCommunicator)
-     let scenarioResult = fsiLogin.startLogin(loginInput: loginInput, language: "cs")
-     let scenario = try scenarioResult.get()
-     
-     let requiredScenario = "s_mobile_authn_un_pwd_sms"
-     guard scenario.scenariosId.contains(requiredScenario) else { return }
+        ```swift
+        guard let federatedLoginCommunicator = CommunicatorFactory.createForFederatedLogin() else { return }
+        guard let authGTWFLCommunicator = CommunicatorFactory.createForAuthGtwFl() else { return }
+        let fsiLogin = FSiLogin.init(federatedLoginCommunicator: federatedLoginCommunicator,
+                                     authGatewayFederatedLoginCommunicator: authGTWFLCommunicator)
+        let scenarioResult = fsiLogin.startLogin(loginInput: loginInput, language: "cs")
+        let scenario = try scenarioResult.get()
+        
+        let requiredScenario = "s_mobile_authn_un_pwd_sms"
+        guard scenario.scenariosId.contains(requiredScenario) else { return }
+        
+        let userNamePasswordResult = scenario.select(scenarioId: requiredScenario)
+        let userNameAndPassword = try userNamePasswordResult.get()
+        let smsResult = userNameAndPassword.submit(userName: userName, password: password)
+        let sms = try smsResult.get()
+        
+        let loginFinishResult = sms.submit(sms: smsCode)
+        let loginFinish = try loginFinishResult.get()
+        let loginOutputResult = loginFinish.get()
+        let loginOutput = try loginOutputResult.get()
+        ```
 
-     let userNamePasswordResult = scenario.select(scenarioId: requiredScenario)
-     let userNameAndPassword = try userNamePasswordResult.get()
-     let smsResult = userNameAndPassword.submit(userName: userName, password: password)
-     let sms = try smsResult.get()
-     
-     let loginFinishResult = sms.submit(sms: smsCode)
-     let loginFinish = try loginFinishResult.get()
-     let loginOutputResult = loginFinish.get()
-     let loginOutput = try loginOutputResult.get()
-     ```
+#### Login using webview
+##### Components & classes supporting Login using webview scenario: 
+```
+TBD
+```
 
 #### Activation
 Activation is enrolling process of MEPi SDK. During activation data required for some MEPi SDK features are generated. It has 4 stages:
@@ -263,21 +295,21 @@ Activation is enrolling process of MEPi SDK. During activation data required for
 - `MEPi.Status`
 - `MEPi.Activation`
     - Android
-    ```kotlin
-    ```
+        ```kotlin
+        ```
     - iOS
-    ```swift
-    guard let communicator = CommunicatorFactory.createForAuthGtwCmWithStaticClientCert() else { return }
-    let activation = Activation.init(authGatewayCaseMobileCommunicator: communicator)
-    let instanceIdResult = activation.getInstanceId()
-    let instanceId = instanceIdResult.get()
-    let clientId = ... // client id of application
-    let accessToken = ... // token from login
-    let result = activation.issueCertificates(accessToken: accessToken,
-                                              clientId: clientId,
-                                              instanceId: instanceId,
-                                              biometricPrompt: "Gimme your biometrics!")
-    ```
+        ```swift
+        guard let communicator = CommunicatorFactory.createForAuthGtwCmWithStaticClientCert() else { return }
+        let activation = Activation.init(authGatewayCaseMobileCommunicator: communicator)
+        let instanceIdResult = activation.getInstanceId()
+        let instanceId = instanceIdResult.get()
+        let clientId = ... // client id of application
+        let accessToken = ... // token from login
+        let result = activation.issueCertificates(accessToken: accessToken,
+                                                  clientId: clientId,
+                                                  instanceId: instanceId,
+                                                  biometricPrompt: "Gimme your biometrics!")
+        ```
 
 #### Transaction
 Preconditions for this scenario:
@@ -295,62 +327,67 @@ Authorization of transaction has 3 stages:
 ##### Components & classes supporting transaction scenario: 
 - `FSi.FSiTransaction`
     - Android
-    ```kotlin
-    ```
+        ```kotlin
+        ```
     - iOS
-    ```swift
-    let accessToken = ... // token from login
-    let mepId = ... // mep id from transaction registration
-    guard let communicator = CommunicatorFactory.createForAuthGtwFta() else { return }
-
-    do {
-    let trx = FSiTransaction(
-                authGatewayFederatedTransactionAuthorizationCommunicator: communicator, 
-                accessToken: accessToken
-              )
-    
-    let lang = "cs" // BE must support trx templates for selected language
-    let trxResult = trx.startTransaction(mepId: mepId, language: lang) 
-    
-    ```
+        ```swift
+        let accessToken = ... // token from login
+        let mepId = ... // mep id from transaction registration
+        guard let communicator = CommunicatorFactory.createForAuthGtwFta() else { return }
+        
+        do {
+        let trx = FSiTransaction(
+                    authGatewayFederatedTransactionAuthorizationCommunicator: communicator, 
+                    accessToken: accessToken
+                  )
+        
+        let lang = "cs" // BE must support trx templates for selected language
+        let trxResult = trx.startTransaction(mepId: mepId, language: lang) 
+        ```
 - `FSi.TransactionScenario`
     - Android
-    ```kotlin
-    ```
+        ```kotlin
+        ```
     - iOS
-    ```swift
-    let scenario = try trxResult.get() // or switch on Result.success/Result.failure
-    let requiredScenario = "..."
-    guard scenario.scenariosId.contains(requiredScenario) else {
-        failed(message: "Does not support '...' scenario.")
-        return
-    }
-    ```
+        ```swift
+        let scenario = try trxResult.get() // or switch on Result.success/Result.failure
+        let requiredScenario = "..."
+        guard scenario.scenariosId.contains(requiredScenario) else {
+            failed(message: "Does not support '...' scenario.")
+            return
+        }
+        ```
 - `FSi.TransactionSMS`
     - Android
-    ```kotlin
-    ```
+        ```kotlin
+        ```
     - iOS
-    ```swift
-    let requiredScenario = "s_mobile_authz_sms"
-    let smsResult = scenario.selectSMS(scenario: requiredScenario)
-    let sms = try confirmationResult.get()
-    let smsCode = ... // show UI with SMS input field & wait user input
-    let result = sms.submit(sms: smsCode)
-    try result.get()
-    ```
+        ```swift
+        let requiredScenario = "s_mobile_authz_sms"
+        let smsResult = scenario.selectSMS(scenario: requiredScenario)
+        let sms = try confirmationResult.get()
+        let smsCode = ... // show UI with SMS input field & wait user input
+        let result = sms.submit(sms: smsCode)
+        try result.get()
+        ```
 - `FSi.TransactionConfirmation`
     - Android
-    ```kotlin
-    ```
+        ```kotlin
+        ```
     - iOS
-    ```swift
-    let requiredScenario = "s_mobile_authz_none"
-    let confirmationResult = scenario.selectConfirmation(scenario: requiredScenario)
-    let confirmation = try confirmationResult.get()
-    let result = confirmation.confirm()
-    try result.get()
-    ```
+        ```swift
+        let requiredScenario = "s_mobile_authz_none"
+        let confirmationResult = scenario.selectConfirmation(scenario: requiredScenario)
+        let confirmation = try confirmationResult.get()
+        let result = confirmation.confirm()
+        try result.get()
+        ```
+
+#### Transaction using webview
+##### Components & classes supporting transaction using webview scenario: 
+```
+TBD
+```
 
 ### Error handling
 If any operation should fail in MEPi SDK, details about the error are returned to the integrating application. An application can use those data to inform the user about failure and/or write them to logs.

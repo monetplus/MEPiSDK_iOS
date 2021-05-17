@@ -1,3 +1,9 @@
+**v8.0.3**
+* [commons] fixed PKCE request generation
+
+**v8.0.2**
+* [commons] fixed id_token expiration verification
+
 **v8.0.1**
 * added 20 min. clock skew tolerance to ID Token expiration validation (DI4RID-2565)
 

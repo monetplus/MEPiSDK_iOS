@@ -1,6 +1,6 @@
 **v3.3.2**
 * [commons] fixed PKCE request generation
-* [mepi] fixed issue with unavailable keys after biometry set modification - `MEPiError.certificateNotFound` is returned when bio key is invalidated.
+* [mepi] fixed issue with unavailable keys after biometry set modification - `MEPiError.certificateNotFound` is returned when bio key is invalidated. (DI4RID-2580)
 
 **v3.3.1**
 * added 20 min. clock skew tolerance to ID Token expiration validation (DI4RID-2565)

@@ -90,6 +90,7 @@ Add following SPM dependency to Xcode project or Package.swift file:
     }
 },
 ```
+Package is referencing built xcframeworks stored at [Monet's Nexus](https://nexus3-public.monetplus.cz/#browse/browse:ahead-ios-release)
 Deprecated:
 Add following line to Cartfile:
 ```

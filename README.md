@@ -200,42 +200,6 @@ CASE mobile has its own links that will be used by integrating application and `
 
 ##### Methods supporting CM login scenario:
 - `CMiTP`'s extensions on `Swift.URL`(iOS) and `Uri`(Android) with method `appendingQuery()`, `appendQuery()` or `parseQuery()`
-- `MEPiCommons.LoginInput`
-    - Android
-        ```kotlin
-        val responseType = ... // "code id_token", "token id_token" or "code"
-        val scopes = ... // requested scopes
-        val state = ... // custom value from application
-        val redirectUri = ... // uri to receive response    
-        val clientId = ... // client id of application
-        val instanceId = ... // instanceId from activation
-
-        val oAuthRequest = OAuthRequest(clientId = clientId, redirectUri = redirectUri, responseType = responseType, scope = scope, state = state)
-
-        val claims = Claims.createCmiInstanceIdClaims(instanceId)
-        val openIdWithClaims = OpenIdConnectRequest(claims)
-
-        val loginInput = LoginInput(oAuthRequest, openIdWithClaims)
-
-        ```
-     - iOS
-        ```swift
-        let responseType = ... // "code id_token", "token id_token" or "code"
-        let instanceId = ... // instanceId from activation,
-        let scopes = ... // requested scopes
-        let state = ... // custom value from application
-        let redirectUri = ... // uri to receive response    
-        let clientId = ... // client id of application
-
-        let oAuthRequest = OAuthRequest(state: state, redirectUri: redirectUri, clientId: clientid, scope: scopes, responseType: responseType)
-        
-        let claims = Claims(idTokenClaims: ["cmiInstanceId": ClaimContent(values: [instanceId])], userInfoClaims: nil)
-        let openIdConnectRequest = OpenIDConnectRequest(claims: claims)
-        
-        let loginInput = LoginInput(oAuthRequest: oAuthRequest, openIDRequest: openIdConnectRequest)
-        ```
-- `MEPiCommons.LoginOutput`
-- extensions for `Uri` & `URL`
     - Android
         ```kotlin
         val loginInput = ...//responseType “code”
@@ -271,8 +235,56 @@ CASE mobile has its own links that will be used by integrating application and `
         let outputResult: Result<LoginOutput, ErrorOutput> =
             url.parseQuery(loginInput: loginInput, federatedLoginCommunicator: communicator)
         let loginOutput = try outputResult.get()
-        let exchanged: Result<LoginOutput, ErrorOutput> = loginOutput.exchangeCodeForToken(clientSecret: String)
+        let exchanged: Result<LoginOutput, ErrorOutput> =
+            loginOutput.exchangeCodeForToken(clientSecret: String)
         ```
+- `MEPiCommons.LoginInput`
+    - Android
+        ```kotlin
+        val responseType = ... // "code id_token", "token id_token" or "code"
+        val scopes = ... // requested scopes
+        val state = ... // custom value from application
+        val redirectUri = ... // uri to receive response    
+        val clientId = ... // client id of application
+        val instanceId = ... // instanceId from activation
+
+        val oAuthRequest = OAuthRequest(
+            clientId = clientId, 
+            redirectUri = redirectUri, 
+            responseType = responseType, 
+            scope = scope, 
+            state = state
+        )
+
+        val claims = Claims.createCmiInstanceIdClaims(instanceId)
+        val openIdWithClaims = OpenIdConnectRequest(claims)
+
+        val loginInput = LoginInput(oAuthRequest, openIdWithClaims)
+
+        ```
+     - iOS
+        ```swift
+        let responseType = ... // "code id_token", "token id_token" or "code"
+        let instanceId = ... // instanceId from activation,
+        let scopes = ... // requested scopes
+        let state = ... // custom value from application
+        let redirectUri = ... // uri to receive response    
+        let clientId = ... // client id of application
+
+        let oAuthRequest = OAuthRequest(
+            state: state, 
+            redirectUri: redirectUri,
+            clientId: clientid, 
+            scope: scopes, 
+            responseType: responseType
+        )
+        
+        let claims = Claims(idTokenClaims: ["cmiInstanceId": ClaimContent(values: [instanceId])], userInfoClaims: nil)
+        let openIdConnectRequest = OpenIDConnectRequest(claims: claims)
+        
+        let loginInput = LoginInput(oAuthRequest: oAuthRequest, openIDRequest: openIdConnectRequest)
+        ```
+- `MEPiCommons.LoginOutput`
 
 #### Login using username, password and sms
 If CASE mobile is not available on the device, or integrating application does not want to enforce usage of CASE mobile identity, integrating application can present the user with a series of traditional forms to enable login by username, password, and SMS code. MEPI SDK will directly process credentials entered by user.
@@ -405,13 +417,31 @@ Activation is enrolling process of MEPi SDK. During activation data required for
 - `MEPi.Activation`
     - Android
         ```kotlin
+        val authGtwCmNetworkCall = ...
+        val activation = Activation(authGtwCmNetworkCall)
+
+        val instanceIdResult = activation.getInstanceId()
+        val instanceId = instanceIdResult.getSuccessOrNull()!!
+
+        val keyWrapper = activation.getBioUnlockableKey().getSuccessOrNull()!!
+        val authenticationKey = ... // unlocked biometric key
+
+        val clientId = ... // client id of application
+        val accessToken = ... // token from login
+        val result = activation.issueCertificates(
+                                        accessToken,
+                                        clientId,
+                                        instanceId,
+                                        key)
         ```
     - iOS
         ```swift
-        guard let communicator = CommunicatorFactory.createForAuthGtwCmWithStaticClientCert() else { return }
+        guard let communicator = ...
         let activation = Activation.init(authGatewayCaseMobileCommunicator: communicator)
+        
         let instanceIdResult = activation.getInstanceId()
         let instanceId = instanceIdResult.get()
+        
         let clientId = ... // client id of application
         let accessToken = ... // token from login
         let result = activation.issueCertificates(accessToken: accessToken,

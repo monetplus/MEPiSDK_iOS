@@ -91,6 +91,7 @@ Add following SPM dependency to Xcode project or Package.swift file:
 },
 ```
 Package is referencing built xcframeworks stored at [Monet's Nexus](https://nexus3-public.monetplus.cz/#browse/browse:ahead-ios-release)
+
 Deprecated:
 Add following line to Cartfile:
 ```
@@ -120,13 +121,17 @@ MEPi component provides API for getting information required to decide which sce
 - `MEPi.StatusFactory`
     - Android
         ```kotlin
-        val retriever = CaseMobileStatusRetriever(application, "cz.csob.smartklic")
+        val package = "cz.csob.smartklic"
+        val retriever = CaseMobileStatusRetriever(application, package)
         val statusFactory = StatusFactory(retriever, application)
         ```
     - iOS
         ```swift
         let cmBundleId = "cz.csob.smartklic"
-        let statusFactory = StatusFactory(urlChecker: UIApplication.shared, caseMobileBundleId: cmBundleId)
+        let statusFactory = StatusFactory(
+            urlChecker: UIApplication.shared, 
+            caseMobileBundleId: cmBundleId
+        )
         ```
 - `MEPi.Status`
     - Android
@@ -137,6 +142,37 @@ MEPi component provides API for getting information required to decide which sce
         ```swift
         let statusResult = statusFactory.getStatus()
         let status = statusResult.get()
+        ```
+- Enhanced CASE mobile status
+    - Android
+        ```swift
+        retriever.retrieveEnhancedStatus(callback = object : CaseMobileStatusCallback {
+            override fun onCaseMobileStatusRetrieved(
+                    result: Either<CaseMobileStatus, ErrorOutput>
+            ) {
+                val enhancedStatus = result.getSuccessOrNull()
+            }
+        })
+        ```
+    - iOS 
+        ```swift
+        let factory = CaseMobileStatusFactory(
+            openUrlChecker: UIApplication.shared,
+            caseMobileBundleId: cmBundleId
+        )
+        let enhancedStatus: CaseMobileStatus = 
+            factory.assembleCaseMobileStatusRetriever().retrieveEnhancedStatus()
+        ```
+- Credentials for TLS client authentication
+    - Android
+        ```kotlin
+        val keyManagers: Either<Array<KeyManager>, ErrorOutput> =
+            statusFactory.getApplicationKeyManagers()
+        ```
+    - iOS
+        ```swift
+        let identity: Result<SecIdentity?, ErrorOutput> =
+            statusFactory.getApplicationClientIdentity()
         ```
  
 #### Login using CASE mobile
@@ -167,21 +203,20 @@ CASE mobile has its own links that will be used by integrating application and `
 - `MEPiCommons.LoginInput`
     - Android
         ```kotlin
-        val networkCall = NetworkCall("serverUrl")
-        val activation = Activation(networkCall).getInstanceId()
-        val oAuthRequest = OAuthRequest(
-            "state",
-            "redirectUri",
-            "clientId",
-            "scopeParam",
-            "responseType" // "code id_token", "token id_token" or "code"
-        )
-        activation.either({ instanceId ->
-            val loginInput = LoginInput(oAuthRequest, OpenIdConnectRequest(instanceId)
-            ...
-        }, { error ->
-            // solve error
-              }
+        val responseType = ... // "code id_token", "token id_token" or "code"
+        val scopes = ... // requested scopes
+        val state = ... // custom value from application
+        val redirectUri = ... // uri to receive response    
+        val clientId = ... // client id of application
+        val instanceId = ... // instanceId from activation
+
+        val oAuthRequest = OAuthRequest(clientId = clientId, redirectUri = redirectUri, responseType = responseType, scope = scope, state = state)
+
+        val claims = Claims.createCmiInstanceIdClaims(instanceId)
+        val openIdWithClaims = OpenIdConnectRequest(claims)
+
+        val loginInput = LoginInput(oAuthRequest, openIdWithClaims)
+
         ```
      - iOS
         ```swift
@@ -191,12 +226,53 @@ CASE mobile has its own links that will be used by integrating application and `
         let state = ... // custom value from application
         let redirectUri = ... // uri to receive response    
         let clientId = ... // client id of application
+
         let oAuthRequest = OAuthRequest(state: state, redirectUri: redirectUri, clientId: clientid, scope: scopes, responseType: responseType)
+        
         let claims = Claims(idTokenClaims: ["cmiInstanceId": ClaimContent(values: [instanceId])], userInfoClaims: nil)
         let openIdConnectRequest = OpenIDConnectRequest(claims: claims)
+        
         let loginInput = LoginInput(oAuthRequest: oAuthRequest, openIDRequest: openIdConnectRequest)
         ```
 - `MEPiCommons.LoginOutput`
+- extensions for `Uri` & `URL`
+    - Android
+        ```kotlin
+        val loginInput = ...//responseType “code”
+
+        val result: Either<Uri, ErrorOutput> = url.appendingQuery(input = loginInput)
+        val uri = result.getSuccessOrNull()!!
+
+        val intent = Intent(Intent.ACTION_VIEW, uri)
+        startActivity(intent)
+
+        ...//continue in CASE mobile
+
+        override fun onNewIntent(intent: Intent?) {
+        intent?.data?.let { uri ->
+            val networkCall = ...
+            val clientSecret = ...
+            uri.parseQuery(loginInput, networkCall).mapEither { output ->
+                   output.exchangeForToken(loginInput, clientSecret, networkCall)
+               }
+        }
+        ```
+     - iOS 
+        ```swift
+        let loginInput = ...//responseType “code”
+        url.cmiProtectionMode = ...//applink vs custom scheme
+        let result: Result<URL, ErrorOutput> = url.appendingQuery(from: LoginInput)
+        //OR
+        let error: ErrorOutput? = url.appendQuery(from: loginInput)
+
+        ...//continue in CASE mobile
+
+        let communicator = ...
+        let outputResult: Result<LoginOutput, ErrorOutput> =
+            url.parseQuery(loginInput: loginInput, federatedLoginCommunicator: communicator)
+        let loginOutput = try outputResult.get()
+        let exchanged: Result<LoginOutput, ErrorOutput> = loginOutput.exchangeCodeForToken(clientSecret: String)
+        ```
 
 #### Login using username, password and sms
 If CASE mobile is not available on the device, or integrating application does not want to enforce usage of CASE mobile identity, integrating application can present the user with a series of traditional forms to enable login by username, password, and SMS code. MEPI SDK will directly process credentials entered by user.
@@ -214,24 +290,7 @@ This login scenario consists of 3 stages:
         ```kotlin
         val flCommunicator = NetworkCall("${serverUrl}/mep/fs/fl/")
         val authCommunicator = NetworkCall("${serverUrl}/mep/fs/svc/authgtw/authn/")
-        val activation = Activation(NetworkCall("serverUrl"))
-        var instanceId: Either<String, ErrorOutput>? = null
-        if (status.applicationActivated.not()) {
-            instanceId = activation.getInstanceId()
-        }
-        val oAuthRequest = OAuthRequest(
-            "state",
-            "redirectUri",
-            "clientId",
-            "scopeParam",
-            "responseType" // "code id_token", "token id_token" or "code"
-        )
-        val connectRequest = if (instanceId is Either.Success) {
-            OpenIdConnectRequest(instanceId.s)
-        } else {
-            null
-        }
-        val loginInput = LoginInput(oAuthRequest, connectRequest)
+        val loginInput = ...
         
         FSiLogin(flCommunicator, authCommunicator).start(
             loginInput,
@@ -244,11 +303,7 @@ This login scenario consists of 3 stages:
             sms.submit("000-000-000")
         }.mapEither { loginFinish ->
             loginFinish.get()
-        }.biMap({ loginOutput ->
-            // go to authorization
-        }, { error ->
-            // solve error
-        }
+        }.biMap({ loginOutput -> }, { error -> }
         ```
      - iOS 
         ```swift
@@ -271,6 +326,57 @@ This login scenario consists of 3 stages:
         let loginFinish = try loginFinishResult.get()
         let loginOutputResult = loginFinish.get()
         let loginOutput = try loginOutputResult.get()
+        ```
+
+#### Login using biometrics
+##### Components & classes supporting Login using biometrics scenario: 
+- BiometricLogin
+    - Android
+        ```kotlin
+        val loginInput = ...
+        val authGtwCmNetworkCall = ... //with client cert
+        val flNetworkCall = …
+        
+        val bioLogin = BiometricLogin(authGtwCmNetworkCall, flNetworkCall)
+        val challenge = bioLogin.getChallenge(loginInput).getSuccessOrNull()!!
+        
+        val reaction = BiometricAuthenticationFailedReaction.None
+        val keyWrapper = challenge.getBioUnlockableKey(reaction).getSuccessOrNull()!!
+        
+        val authenticationKey = ... // unlocked biometric key with prompt
+        
+        val loginOutput = challenge.verify(authenticationKey).getSuccessOrNull()!!
+        ```
+    - Android - UnlockKey
+        ```kotlin
+        val keyWrapper = ...
+        val promptInfo = BiometricPrompt.PromptInfo.Builder()...build();
+
+        //activity or fragment
+        keyWrapper.unlockKey(this@MainActivity, promptInfo, object : AuthenticationResult {
+            override fun authenticationSuccessful(authenticationKey: AuthenticationKey) {
+                ...//continue with scenario
+            }
+            override fun authenticationFailed(error: ErrorOutput) {}
+        })
+        ```
+
+     - iOS 
+        ```swift
+        let loginInput = ...
+        let authGtwCmCommunicator = ... //with client cert
+        let federatedLoginCommunicator = ...
+        
+        let bioLogin = BiometricLogin(
+                    authGatewayCaseMobileCommunicator: authGtwCmCommunicator,
+                    federatedLoginCommunicator: federatedLoginCommunicator)
+        
+        let challenge = bioLogin.getChallenge(loginInput: loginInput)
+        let bioLoginChallenge = try challenge.get()
+        
+        let verify = bioLoginChallenge.verify(
+        biometricPrompt: "Přihlašte se biometrií.")
+        let loginOutput = try verify.get()
         ```
 
 #### Login using webview

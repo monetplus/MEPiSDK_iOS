@@ -1,3 +1,9 @@
+**v3.4.0**
+* [commons] added `DateValidationFailed` to MEPiError enum
+* [commons] added `equals` & `hashcode` methods implementation `ErrorOutput` and `IdToken` classes
+* [commons] added processing of server time to ID Token expiration validation (IDENTITY-506)
+* [fsi] added error mappings for `066968`, `066608` errors to `MEPiError.MethodNotAllowed` (DI4RID-2511)
+
 **v3.3.2**
 * [commons] fixed PKCE request generation
 * [mepi] fixed issue with unavailable keys after biometry set modification - `MEPiError.certificateNotFound` is returned when bio key is invalidated. (DI4RID-2580)

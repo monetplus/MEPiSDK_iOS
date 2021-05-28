@@ -1,3 +1,10 @@
+**v8.1.1**
+* [fsi] added error mappings for `066968`, `066608` errors to `MEPiError.methodNotAllowed` (DI4RID-2511)
+
+**v8.1.0**
+* [commons] added `dateValidationFailed` to `MEPiError` enum
+* [commons] added processing of server time to ID Token expiration validation (IDENTITY-506)
+
 **v8.0.3**
 * [commons] fixed PKCE request generation
 

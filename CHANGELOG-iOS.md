@@ -1,4 +1,11 @@
+**v9.0.0**
+* [mepi] added `ApplicationSessionManager` class with `keepAlive()` method (IDENTTITY-317)
+* [mepi] removed automatic deactivation after biometric lockout (IDENTITY-409)
+* [mepi] removed `reaction` parameter from `BiometricLoginChallenge.verify()` (IDENTITY-409)
+* [mepi] removed `deactivateReason` parameter from `Deactivation.deactivate()` (IDENTITY-409)
+
 **v8.1.1**
+* [commons] added new errors mappings (DI4RID-2511)
 * [fsi] added error mappings for `066968`, `066608` errors to `MEPiError.methodNotAllowed` (DI4RID-2511)
 
 **v8.1.0**
@@ -6,18 +13,18 @@
 * [commons] added processing of server time to ID Token expiration validation (IDENTITY-506)
 
 **v8.0.3**
-* [commons] fixed PKCE request generation
+* [commons] fixed generation of PKCE request
 
 **v8.0.2**
-* [commons] fixed id_token expiration verification
+* [commons] fixed base value for `Date` parsing in IDToken payload from apple's 2000 to UNIX's 1970
 
 **v8.0.1**
-* added 20 min. clock skew tolerance to ID Token expiration validation (DI4RID-2565)
+* [commons] added 20 min. clock skew tolerance to ID Token expiration validation (DI4RID-2565)
 
 **v8.0.0**
 * [webview] enabled build for distribution
-* [mepi] revised reaction to error in deactivation. Lib will try to remove both certificates now.
 * [commons] removed `federatedLoginCommunicator` parameter from `LoginOutput.exchangeCodeForToken()` method
+* [mepi] revised reaction to error in deactivation. Lib will try to remove both certificates now.
 
 **v7.0.1**
 * [mepi] fixed issue with unavailable keys after biometry set modification (DI4RID-2522)

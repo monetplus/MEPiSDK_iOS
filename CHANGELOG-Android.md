@@ -1,3 +1,20 @@
+**v3.6.0**
+* [mepi] added `ActivationForbidden` to `MEPiError` enum as reaction to respective error from BE (IDENTITY-485)
+
+**v3.5.1**
+* [all] updated dokka plugin for generating documentation
+* [mepi] corrected proguard rules 
+
+**v3.5.0**
+* [commons] added support for empty response calls to `MepFsNetwork`
+* [mepi] added `ApplicationSessionManager` with `keepAlive` method (IDENTITY-317)
+* [mepi] added `BiometryBlockedBySystem` to `MEPiError` enum - returned when biometrics are blocked by system
+* [mepi] removed automatic deactivation after blocking biometrics by system (IDENTITY-409)
+* [mepi] removed `reaction` parameter from `getBioUnlockableKey()` method from `BiometricLoginChallenge` class
+* [mepi] removed `BiometricAuthenticationFailedReaction` class
+* [mepi] removed `reason` and `sessionId` parameters from `deactivate()` method from `Deactivation` class
+* [mepi] removed `DeactivateReason` class
+
 **v3.4.0**
 * [commons] added `DateValidationFailed` to MEPiError enum
 * [commons] added `equals` & `hashcode` methods implementation `ErrorOutput` and `IdToken` classes

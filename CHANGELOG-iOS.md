@@ -1,3 +1,6 @@
+**v9.1.0**
+* [mepi] added `ActivationForbidden` to `MEPiError` enum as reaction to respective error from BE (IDENTITY-485)
+
 **v9.0.0**
 * [mepi] added `ApplicationSessionManager` class with `keepAlive()` method (IDENTTITY-317)
 * [mepi] removed automatic deactivation after biometric lockout (IDENTITY-409)

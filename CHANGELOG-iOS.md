@@ -1,3 +1,6 @@
+**v9.1.1**
+* [all] no changes in libraries, released with dSYM files
+
 **v9.1.0**
 * [mepi] added `ActivationForbidden` to `MEPiError` enum as reaction to respective error from BE (IDENTITY-485)
 

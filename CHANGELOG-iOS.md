@@ -1,3 +1,6 @@
+**v9.0.1**
+* [all] no changes in libraries, released with dSYM files
+
 **v9.1.1**
 * [all] no changes in libraries, released with dSYM files
 

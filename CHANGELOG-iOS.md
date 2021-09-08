@@ -1,3 +1,17 @@
+**v11.0.0**
+* [fsi] removed `resend` method from `SMS` class (IDENTITY-662)
+* [fsi] added `expiresIn` property to `SMS` class (IDENTITY-662)
+* [fsi] revised server error codes from Auth Gtw FL and their mapping to `MEPiError` (IDENTITY-662)
+* [commons] removed `MEPiError` items: `generalAuthnError` (IDENTITY-662)
+* [commons] added `MEPiError` items: `invalidVerification`, `invalidVerificationLastAttempt` (IDENTITY-662)
+* [mepi] added `BiometryUnlocker` for handling lockouts (IDENTITY-539)
+* [mepi] added `BiometryStatus` enum (IDENTITY-539)
+* [mepi] renamed `Status` property `biometricsAvailableOnDevice` to `biometricsAvailabilityOnDevice` (type changed from `Bool` to `BiometryStatus`)
+* [mepi] added new errors returned from `Activation.issueCertificates()`: `biometryCanceled`, `biometryLocked`
+
+**v10.0.0**
+* [all] migrated all dependencies to version with Swift.Result
+
 **v9.0.1**
 * [all] no changes in libraries, released with dSYM files
 

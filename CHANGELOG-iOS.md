@@ -1,3 +1,11 @@
+**v11.1.0**
+* [webview] added new initializers with two URLs to `CMiWebViewLoginFactory` and `CMiWebViewTransactionFactory`
+* [webview] deprecated old initializers in `CMiWebViewLoginFactory` and `CMiWebViewTransactionFactory`
+
+**v9.2.0**
+* [webview] added new initializers with two URLs to `CMiWebViewLoginFactory` and `CMiWebViewTransactionFactory`
+* [webview] deprecated old initializers in `CMiWebViewLoginFactory` and `CMiWebViewTransactionFactory`
+
 **v11.0.0**
 * [fsi] removed `resend` method from `SMS` class (IDENTITY-662)
 * [fsi] added `expiresIn` property to `SMS` class (IDENTITY-662)

@@ -1,4 +1,7 @@
-**v11.1.0**
+**v11.0.2**
+* [mepi] added public initializer to `BiometryUnlocker`
+
+**v11.0.1**
 * [webview] added new initializers with two URLs to `CMiWebViewLoginFactory` and `CMiWebViewTransactionFactory`
 * [webview] deprecated old initializers in `CMiWebViewLoginFactory` and `CMiWebViewTransactionFactory`
 

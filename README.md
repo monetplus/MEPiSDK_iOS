@@ -452,18 +452,19 @@ Activation is enrolling process of MEPi SDK. During activation data required for
 
 #### ID Token processing
 If it was requested at the start of a login, ID token is parsed to `LoginOutput` returned from login scenarions. Both standard and non-standard data can be retrieved from returned `IDToken` instance.
-    - iOS 
-        ```swift
-        let loginOutput = ... // output of login scenario
-        let idToken = loginOutput.idToken
-        let subject = idToken?.subject // standard value
-        let sessionState: String? = idToken?.get(parameter: Keys.session_state) // non-standard value
+- iOS 
+    ```swift
+    let loginOutput = ... // output of login scenario
+    let idToken = loginOutput.idToken
+      
+    let subject = idToken?.subject // standard value
+    let sessionState: String? = idToken?.get(parameter: Keys.session_state) // non-standard value
         
-        enum Keys: String, CodingKey { // enum with non-standard values
-            case session_state
-            ...
-        }
-        ```
+    enum Keys: String, CodingKey { // enum with non-standard values
+        case session_state
+        ...
+    }
+    ```
 
 #### Transaction
 Preconditions for this scenario:

@@ -103,6 +103,7 @@ MEPi SDK supports following scenarios:
 - Status
 - Login using CASE mobile
 - Login using username, password and SMS
+- Login using biometrics
 - Login using webview
 - Activation
 - Transaction using SMS
@@ -343,6 +344,9 @@ This login scenario consists of 3 stages:
 #### Login using biometrics
 ##### Components & classes supporting Login using biometrics scenario: 
 - BiometricLogin
+- BiometricLoginUserAuthentication (Android only)
+- BiometricPromptConfig (Android only)
+- BiometricLoginChallenge
     - Android
         ```kotlin
         val loginInput = ...
@@ -350,16 +354,27 @@ This login scenario consists of 3 stages:
         val flNetworkCall = …
         
         val bioLogin = BiometricLogin(authGtwCmNetworkCall, flNetworkCall)
-        val challenge = bioLogin.getChallenge(loginInput).getSuccessOrNull()!!
-        
-        val reaction = BiometricAuthenticationFailedReaction.None
-        val keyWrapper = challenge.getBioUnlockableKey(reaction).getSuccessOrNull()!!
-        
-        val authenticationKey = ... // unlocked biometric key with prompt
+        val bioUserAuthentication = bioLogin.getChallenge(loginInput).getSuccessOrNull()!!
+
+        val challenge = ... // authenticate user to unlock biometric key
         
         val loginOutput = challenge.verify(authenticationKey).getSuccessOrNull()!!
         ```
-    - Android - UnlockKey
+    - Android - Authenticate User (after v4.0.0)
+        ```kotlin       
+            val bioUserAuthentication = ...
+            val promptInfo = BiometricPromptConfig(
+                it.wysiwys.name,
+                subtitle ="Authentication is required to continue",
+                negativeButtonText = "Close",
+                isConfirmationRequired = true
+            )
+            bioUserAuthentication.authenticate(activity, promptInfo) { result: Either<ErrorOutput, BiometricLoginChallenge> ->
+                val challenge = result.getSuccessOrNull()!! 
+                ...//continue with scenario
+            }
+        ```
+    - Android - UnlockKey (before v4.0.0)
         ```kotlin
         val keyWrapper = ...
         val promptInfo = BiometricPrompt.PromptInfo.Builder()...build();

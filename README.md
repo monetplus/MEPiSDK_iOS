@@ -109,6 +109,7 @@ MEPi SDK supports following scenarios:
 - Transaction using SMS
 - Transaction confirmation
 - Transaction using webview
+- Unlock biometry
 
 Following sections provide detailed description of these scenarios.
 
@@ -343,10 +344,10 @@ This login scenario consists of 3 stages:
 
 #### Login using biometrics
 ##### Components & classes supporting Login using biometrics scenario: 
-- BiometricLogin
-- BiometricLoginUserAuthentication (Android only)
-- BiometricPromptConfig (Android only)
-- BiometricLoginChallenge
+- `MEPi.BiometricLogin`
+- `MEPi.BiometricLoginUserAuthentication` (Android only)
+- `MEPi.BiometricPromptConfig` (Android only)
+- `MEPi.BiometricLoginChallenge`
     - Android
         ```kotlin
         val loginInput = ...
@@ -363,13 +364,13 @@ This login scenario consists of 3 stages:
     - Android - Authenticate User (after v4.0.0)
         ```kotlin       
             val bioUserAuthentication = ...
-            val promptInfo = BiometricPromptConfig(
+            val promptConfig = BiometricPromptConfig(
                 it.wysiwys.name,
                 subtitle ="Authentication is required to continue",
                 negativeButtonText = "Close",
                 isConfirmationRequired = true
             )
-            bioUserAuthentication.authenticate(activity, promptInfo) { result: Either<ErrorOutput, BiometricLoginChallenge> ->
+            bioUserAuthentication.authenticate(activity, promptConfig) { result: Either<ErrorOutput, BiometricLoginChallenge> ->
                 val challenge = result.getSuccessOrNull()!! 
                 ...//continue with scenario
             }
@@ -558,6 +559,32 @@ Authorization of transaction has 3 stages:
 ```
 TBD
 ```
+
+#### Unlock biometry
+After multiple failed attempts to autheticate user with biometric, OS will block its consecutive usage. This can be reverted by entering device credential (pattern/PIN/password on Android, passcode on iOS). An application can offer dialog that will promp user to enter device credential. After successful verification, user can use biometrics again.
+
+##### Components & classes supporting unlock biometry scenario: 
+- `MEPi.BiometricUnlocker`
+- `MEPi.BiometricPromptConfig`
+    - Android
+        ```kotlin
+        val promptConfig = BiometricPromptConfig(
+                "Biometry unlock",
+                subtitle ="Authentication is required to continue",
+                negativeButtonText = "Close",
+                isConfirmationRequired = true
+            )
+        BiometricUnlocker().unlock(activity, promptConfig) { result: Boolean -> 
+                ..// show scenario result to user
+            }
+        ```
+    - iOS
+        ```swift
+         BiometricUnlocker().unlock(localizedReason: "Biometry unlock") { [weak self] success in
+                ..// show scenario result to user
+            }
+        ```
+
 
 ### Error handling
 If any operation should fail in MEPi SDK, details about the error are returned to the integrating application. An application can use those data to inform the user about failure and/or write them to logs.

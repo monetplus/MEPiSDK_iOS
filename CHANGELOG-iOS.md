@@ -1,3 +1,6 @@
+**v9.3.0**
+* [webview] added `clientIdentity` parameter to initializers of `CMiWebViewLoginFactory` and `CMiWebViewTransactionFactory`
+
 **v11.0.2**
 * [mepi] added public initializer to `BiometryUnlocker`
 

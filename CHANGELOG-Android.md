@@ -1,3 +1,60 @@
+v4.0.2
+* [mepi] fixed error propagation in `BiometricLoginUserAuthentication` class
+
+v4.0.1
+* [mepi] fixed obfuscation of `BiometryStatus` enum
+
+v4.0.0
+* [all] migrated to `Either` implementation from functional lib ("com.aheaditec:functional:0.3.1")
+    * warning: ClientCertificates still depends on old `com.aheaditec.core.Either` library
+    * Migration Guide to new Either class:
+        * order must be changed ->
+            * before `Either<Success, Failure>`
+            * now `Either<Left, Right>` - `Left` represents `Failure`, `Right` represents `Success`
+            * replace all - regex ->  `Either<(\w*), (\w*)>` -> `Either<$2, $1>`
+        * import must be changed ->
+            * before `import com.aheaditec.core.Either`
+            * now `import com.aheaditec.functional.Either`
+        * import must be changed ->
+            * before `import com.aheaditec.core.mapEither`
+            * now  `import com.aheaditec.functional.flatMap`
+        * import must be changed ->
+            * before `import com.aheaditec.core.map`
+            * now `import com.aheaditec.functional.map`
+        * creation of `Either.Success` instance must be changed ->
+            * before `Either.Success`
+            * now `Either.Right`
+            * replace all - regex -> `Either.Success\(` -> `Either.Right(`
+        * creation of `Either.Failure` instance must be changed ->
+            * before `Either.Failure`
+            * now `Either.Left`
+            * replace all - regex -> `Either.Failure\(` -> `Either.Left(`
+        * replace usages of:
+            * `mapEither` with `flatMap`
+            * `flatMapAsync` with `flatMap`
+            * `either` with `fold` and switch blocks (first is failure, then success)
+            * `biMapAsync` with `biMap` and switch blocks (first is failure, then success)
+            * `mapFailure` with `mapLeft` and modify the body to return Left without Either
+            * `withSuccess` with `withRight`
+            * `isSuccess` with `isRight`
+            * `isFailure` with `isLeft`
+* [fsi] removed `resendSms` method from `Sms` class (IDENTITY-662)
+* [fsi] added `expiresIn` property to Sms class (IDENTITY-662)
+* [fsi] revised server error codes from AuthGtwFl and their mapping to MEPiError (IDENTITY-662)
+* [commons] removed MEPiError items: GeneralAuthnError (IDENTITY-662)
+* [commons] added MEPiError items: InvalidVerification, InvalidVerificationLastAttempt (IDENTITY-662)
+* [mepi] extracted biometric user authentication in biometric login scenario to separate class (IDENTITY-539)
+    * removed `BioUnlockKeyWrapper` class
+    * added new class `BiometricLoginUserAuthentication` as a replacement for `UnlockKeyWrapper` class
+    * replaced return value of `BiometricLogin.getChallenge()` method from `BiometricLoginChallenge` to `BiometricLoginUserAuthentication`
+    * removed `getBioUnlockableKey()` method from `BiometricLoginChallenge` class
+    * removed parameter `key` from `BiometricLoginChallenge.verify()` method
+    * see [README.md](https://github.com/monetplus/MEPiSDK_iOS/blob/master/README.md) for usage example
+* [mepi] added BiometryUnlocker for handling lockouts (IDENTITY-539)
+    * see [README.md](https://github.com/monetplus/MEPiSDK_iOS/blob/master/README.md) for usage example
+* [mepi] changed type of `Status.biometricsAvailableOnDevice` from `boolean` to `BiometryStatus`
+
+
 **v3.6.0**
 * [mepi] added `ActivationForbidden` to `MEPiError` enum as reaction to respective error from BE (IDENTITY-485)
 

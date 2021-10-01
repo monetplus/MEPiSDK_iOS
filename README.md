@@ -68,6 +68,7 @@ implementation("com.aheaditec.utils:core:$latest_version")
 implementation 'com.aheaditec.utils:network:$latest_version'
 implementation 'com.aheaditec.talsec:storage:$latest_version'
 implementation 'com.aheaditec.talsec:ClientCertificates:$latest_version'
+implementation 'com.aheaditec:functional:$latest_version'
 
 // PKCS stuff
 implementation 'com.madgag.spongycastle:pkix:1.51.0.0'

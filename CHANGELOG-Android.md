@@ -1,3 +1,15 @@
+v6.0.0
+* [commons] added changes made in v4.0.0 related to IDENTITY-662
+* [fsi] added changes made in v4.0.0 related to IDENTITY-662
+
+v5.0.0
+* [commons] reverted changes made in v4.0.0 related to IDENTITY-662
+* [fsi] reverted changes made in v4.0.0 related to IDENTITY-662
+
+v4.0.3
+* [mepi] fixed parameters for biometry prompt in biometry unlock scenario
+* [mepi] fixed multiple calls of `callback` method passed to `authenticate()` methods in `BiometricLoginUserAuthentication`
+
 v4.0.2
 * [mepi] fixed error propagation in `BiometricLoginUserAuthentication` class
 

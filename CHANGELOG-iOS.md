@@ -1,10 +1,10 @@
 **v13.0.0**
-* [commons] added changes made in v4.0.0 related to IDENTITY-662
-* [fsi] added changes made in v4.0.0 related to IDENTITY-662
+* [commons] added changes made in v11.0.0 related to IDENTITY-662
+* [fsi] added changes made in v11.0.0 related to IDENTITY-662
 
 **v12.0.0**
-* [commons] reverted changes made in v4.0.0 related to IDENTITY-662
-* [fsi] reverted changes made in v4.0.0 related to IDENTITY-662
+* [commons] reverted changes made in v11.0.0 related to IDENTITY-662
+* [fsi] reverted changes made in v11.0.0 related to IDENTITY-662
 
 **v9.3.0**
 * [webview] added `clientIdentity` parameter to initializers of `CMiWebViewLoginFactory` and `CMiWebViewTransactionFactory`

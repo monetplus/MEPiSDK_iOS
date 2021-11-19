@@ -1,3 +1,8 @@
+v7.0.0
+* [all] updated network lib dependency to 3.0.0 (IDENTITY-976)
+    * app can configure minimal TLS version in HttpConfig
+* [commons] enhanced performance of IdToken verification by adding call to Jose4j library in LoginInput (IDENTITY-976)
+
 v6.0.0
 * [commons] added changes made in v4.0.0 related to IDENTITY-662
 * [fsi] added changes made in v4.0.0 related to IDENTITY-662

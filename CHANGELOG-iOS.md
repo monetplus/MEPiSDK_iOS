@@ -1,3 +1,6 @@
+**v14.0.0**
+* [all] updated network lib dependency (IDENTITY-976)
+
 **v13.0.0**
 * [commons] added changes made in v11.0.0 related to IDENTITY-662
 * [fsi] added changes made in v11.0.0 related to IDENTITY-662

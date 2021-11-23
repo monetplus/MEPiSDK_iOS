@@ -1,3 +1,6 @@
+v7.1.0
+* [commons] added attempt to process server error response, when http code 200 is received and positive server response parsing fails (IDENTITY-662)
+
 v7.0.0
 * [all] updated network lib dependency to 3.0.0 (IDENTITY-976)
     * app can configure minimal TLS version in HttpConfig

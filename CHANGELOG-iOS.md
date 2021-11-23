@@ -1,3 +1,6 @@
+**v14.1.0**
+* [commons] added attempt to process server error response, when http code 200 is received and positive server response parsing fails (IDENTITY-662)
+
 **v14.0.0**
 * [all] updated network lib dependency (IDENTITY-976)
 

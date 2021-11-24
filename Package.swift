@@ -4,33 +4,33 @@
 import PackageDescription
 
 private class Versions {
-    static let CMiTP = "14.1.0"
+    static let CMiTP = "14.1.1"
     static let ClientCertificates = "4.0.5"
     static let CommunicatorFramework = "4.1.0"
     static let CoreUtilities = "3.2.3"
-    static let FSi = "14.1.0"
+    static let FSi = "14.1.1"
     static let JOSESwift = "2.0.5"
-    static let MEPi = "14.1.0"
-    static let MEPiCommons = "14.1.0"
+    static let MEPi = "14.1.1"
+    static let MEPiCommons = "14.1.1"
     static let SecureStorage = "5.0.1"
     static let TalsecCertificatesFramework = "9.0.0"
     static let OpenSSL = "1.1.1200"
-    static let CMiWebView = "14.1.0"
+    static let CMiWebView = "14.1.1"
 }
 
 private class Checksums {
-    static let CMiTP = "542d56c8e7085796beb2b4d1ca3e548281732a0aa3a2bccf4ebf7d14ca299252"
+    static let CMiTP = "cd12e6b0c6aa3b27f2cc76134da82fe61bdcd85ba9074c4bbec1b5282462028a"
     static let ClientCertificates = "b7bc4ce959be1b496c99daf0c0238b0f224550c9245a04a062dde287343788bc"
     static let CommunicatorFramework = "1d5ef93e2a90e076a64d92b91a419fdc9d9f72970dd35c61d622555d0851d094"
     static let CoreUtilities = "bf41861bb6b26c825e8066dc514a4ff4883c18a2ae7daf8429da4d9c80909ca3"
-    static let FSi = "bb5eca7dd63087e671584bf080a701af48e13cac40a09d88deb3baad3e315fbc"
+    static let FSi = "30542b1ecd17a2fdf82b3a9466651b0aa1b744b897959e60c8a67655f47af404"
     static let JOSESwift = "84d97de8fabc4038c1f2055c07a59da54e7de420a00aba519df08a3f93cd7e58"
-    static let MEPi = "fb70f71fa2ebab001ae3a2b52c74ba9c31978744aff8c8eb71b5d19830451ac1"
-    static let MEPiCommons = "7cfb2c93cf52cf1392e5d0378ff33c6e9abfe4ef6eabafde8360cbf6e0224c43"
+    static let MEPi = "3686c432884c38f6b356ff8ef63e9b4fbab4d16d4ef10eeaa8a1e31a0531b12e"
+    static let MEPiCommons = "22bdd3ef8b58bff4ae93b737ba5d9ec0b53966e07ee99dabd651e3ec962e8676"
     static let SecureStorage = "2f192c5d85a33b2914e9e40909ef89d74328d504e9d82c505e0965fa5f424dbf"
     static let TalsecCertificatesFramework = "a6766848b626b46868ccb1170ca5b106e0d79a0152895bcc1bcfcb6d54ad4325"
     static let OpenSSL = "c253bcaf1ff5b22f544a5d7642dce422e84258a4f11833293a1d9b0334800108"
-    static let CMiWebView = "932e5b175a2c436aa190771f11e1d68e12afd46a9521180b6845cf6ddebdcfc2"
+    static let CMiWebView = "f3db049825cf03d79a45c26c5c9f8375f43ed31152dff4618c01710838c95d8c"
 }
 
 let package = Package(

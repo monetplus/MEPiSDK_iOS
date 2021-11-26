@@ -1,5 +1,5 @@
 v7.1.1
-* [commons] fixed combined parsing of overlapping positive and negative version, with http code 200 (IDENTITY-662)
+* [commons] fixed combined parsing of overlapping positive and negative data in server response with http code 200 (IDENTITY-662)
 
 v7.1.0
 * [commons] added attempt to process server error response, when http code 200 is received and positive server response parsing fails (IDENTITY-662)

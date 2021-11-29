@@ -1,3 +1,9 @@
+v8.0.0
+* [all] removed dependency on `com.aheaditec.utils:core`
+* [mepi] updated dependencies on `com.aheaditec.talsec:ClientCertificates` to `2.0.0`
+* [mepi] updated dependencies on `com.aheaditec.talsec:storage` to `2.0.0`
+* [commons] fixed serialization of PkceCodeChallenge
+
 v7.1.1
 * [commons] fixed combined parsing of overlapping positive and negative data in server response with http code 200 (IDENTITY-662)
 

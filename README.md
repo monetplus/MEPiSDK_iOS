@@ -107,6 +107,7 @@ MEPi SDK supports following scenarios:
 - Login using biometrics
 - Login using webview
 - Activation
+- InitialClientCertificates
 - Transaction using SMS
 - Transaction confirmation
 - Transaction using webview

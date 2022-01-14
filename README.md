@@ -482,6 +482,59 @@ If it was requested at the start of a login, ID token is parsed to `LoginOutput`
         ...
     }
     ```
+    
+#### Issue initial client certificate
+Initial client certificate is used to authenticate mobile application during network calls in first login scenario. The certificate is valid only for a few minutes. Mobile Application can request issuing of initial certificate from server before login scenario or during scenarion if previous certificate expires. Classes in MEPi SDK, that are calling enpoints protected by initial client certificates provide API to update client certificate if needed.
+
+##### Components & classes supporting Initial certificate issuing scenario: 
+- `MEPi.InitialClientCertificates`
+    - Android
+        ```kotlin
+        val caseMsCommunicator = NetworkCall("${serverUrl}/casems/attestation/")
+        val safetyNetAPIKey = ...
+        val clientId = ...
+        val context = ...
+        
+        val initClientCertificate = InitialClientCertificate(context, caseMsCommunicator, apiKey: safetyNetAPIKey)
+		val certificate = clientCertificate.requestInitialClientCertificate(clientId: clientId).getSuccessOrNull()!!
+        ```
+     - iOS 
+        ```swift
+        guard let caseMsCommunicator = CommunicatorFactory.createForCaseMs() else { return }
+        val clientId = ...
+      
+        let initClientCertificate = InitialClientCertificate(caseMsCommunicator: caseMsCommunicator)
+        let certificateResult = initialClientCertificate.requestInitialClientCertificate(clientId: clientId)
+        let clientCertificate = try clientCertificateResult.get()
+
+        ```
+    - (Android) `MEPiCommons.SslContextChangeable`
+        ```kotlin
+        setSslContext(sslContext: SSLContext)
+        ```
+        ```kotlin
+        LoginOutput
+        FSiLogin
+        Scenario
+        UsernameAndPassword
+        SMS
+        LoginFinish
+        Activation
+        ```
+
+    - (iOS) `MEPiCommons.ContainsSessionDelegateChangeable` protocol and conforming classes
+        ```swift
+        func changeSessionDelegate(to sessionDelegate: URLSessionDelegate?)
+        ```
+        ```swift
+        LoginOutput
+        FSiLogin
+        Scenario
+        UsernameAndPassword
+        SMS
+        LoginFinish
+        Activation
+        ```
 
 #### Transaction
 Preconditions for this scenario:

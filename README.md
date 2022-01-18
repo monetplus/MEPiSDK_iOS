@@ -101,17 +101,18 @@ binary "https://raw.githubusercontent.com/monetplus/MEPiSDK_iOS/master/mepisdk_c
 
 ### Supported scenarios
 MEPi SDK supports following scenarios:
-- Status
-- Login using CASE mobile
-- Login using username, password and SMS
-- Login using biometrics
-- Login using webview
-- Activation
-- InitialClientCertificates
-- Transaction using SMS
-- Transaction confirmation
-- Transaction using webview
-- Unlock biometry
+- [Status](#status)
+- [Login using CASE mobile](#login-using-case-mobile)
+- [Login using username, password and SMS](#login-using-username-password-and-sms)
+- [Login using biometrics](#login-using-biometrics)
+- [Login using webview](#login-using-webview)
+- [Activation](#activation)
+- [Issue initial client certificate](#issue-initial-client-certificate)
+- [Update client certificate](#update-client-certificate)
+- [Transaction using SMS](#transaction)
+- [Transaction confirmation](#transaction)
+- [Transaction using webview](#transaction-using-webview)
+- [Unlock biometry](#unlock-biometry)
 
 Following sections provide detailed description of these scenarios.
 
@@ -235,7 +236,7 @@ CASE mobile has its own links that will be used by integrating application and `
 
         ...//continue in CASE mobile
 
-        let communicator = ...
+        let communicator = CommunicatorFactory.createForFederatedLogin() else { return }
         let outputResult: Result<LoginOutput, ErrorOutput> =
             url.parseQuery(loginInput: loginInput, federatedLoginCommunicator: communicator)
         let loginOutput = try outputResult.get()
@@ -394,8 +395,8 @@ This login scenario consists of 3 stages:
      - iOS 
         ```swift
         let loginInput = ...
-        let authGtwCmCommunicator = ... //with client cert
-        let federatedLoginCommunicator = ...
+        let authGtwCmCommunicator = CommunicatorFactory.createForAuthGtwCm() //with client cert
+        let federatedLoginCommunicator = CommunicatorFactory.createForFederatedLogin() else { return }
         
         let bioLogin = BiometricLogin(
                     authGatewayCaseMobileCommunicator: authGtwCmCommunicator,
@@ -454,7 +455,7 @@ Activation is enrolling process of MEPi SDK. During activation data required for
         ```
     - iOS
         ```swift
-        guard let communicator = ...
+        guard let communicator = CommunicatorFactory.createForAuthGtwCm()
         let activation = Activation.init(authGatewayCaseMobileCommunicator: communicator)
         
         let instanceIdResult = activation.getInstanceId()
@@ -485,7 +486,7 @@ If it was requested at the start of a login, ID token is parsed to `LoginOutput`
     ```
     
 #### Issue initial client certificate
-Initial client certificate is used to authenticate mobile application during network calls in first login scenario. The certificate is valid only for a few minutes. Mobile Application can request issuing of initial certificate from server before login scenario or during scenarion if previous certificate expires. Classes in MEPi SDK, that are calling enpoints protected by initial client certificates provide API to update client certificate if needed.
+Initial client certificate is used to authenticate mobile application during network calls in first login scenario. The certificate is valid only for a few minutes. Mobile Application can request issuing of initial certificate from server before login scenario or during scenarion if previous certificate expires.
 
 ##### Components & classes supporting Initial certificate issuing scenario: 
 - `MEPi.InitialClientCertificates`
@@ -493,25 +494,33 @@ Initial client certificate is used to authenticate mobile application during net
         ```kotlin
         val caseMsCommunicator = NetworkCall("${serverUrl}/casems/attestation/")
         val safetyNetAPIKey = ...
-        val clientId = ...
+        val clientId = ... // client id of application
         val context = ...
-        
-        val initClientCertificate = InitialClientCertificate(context, caseMsCommunicator, apiKey: safetyNetAPIKey)
-		val certificate = clientCertificate.requestInitialClientCertificate(clientId: clientId).getSuccessOrNull()!!
+	
+        val initClientCertificate = InitialClientCertificate(context, caseMsCommunicator, safetyNetAPIKey)
+        val certificate: InitialClientCertificateResult = clientCertificate.requestInitialClientCertificate(clientId).getSuccessOrNull()
         ```
+	
      - iOS 
         ```swift
         guard let caseMsCommunicator = CommunicatorFactory.createForCaseMs() else { return }
-        val clientId = ...
+        val clientId = ... // client id of application
       
         let initClientCertificate = InitialClientCertificate(caseMsCommunicator: caseMsCommunicator)
         let certificateResult = initialClientCertificate.requestInitialClientCertificate(clientId: clientId)
-        let clientCertificate = try clientCertificateResult.get()
+        let clientCertificate: InitialClientCertificateResult = try clientCertificateResult.get()
 
         ```
+#### Update client certificate
+Initial client certificate issued by MEP (see previous scenario) are valid only for short period (few minutes). When any login scenario takes to long to complete, initial certificate might expire. To resolve this, application can request another initial certificate, set it to class representing interupted login step and continue with the login scenario.
+Classes in MEPi SDK, that are calling enpoints protected by initial client certificates provide API to update client certificate if needed.
+
+##### Components & classes supporting update of client certificate: 
     - (Android) `MEPiCommons.SslContextChangeable`
         ```kotlin
-        setSslContext(sslContext: SSLContext)
+        interface SslContextChangeable {
+	    setSslContext(sslContext: SSLContext)
+	}
         ```
         ```kotlin
         LoginOutput
@@ -525,7 +534,9 @@ Initial client certificate is used to authenticate mobile application during net
 
     - (iOS) `MEPiCommons.ContainsSessionDelegateChangeable` protocol and conforming classes
         ```swift
-        func changeSessionDelegate(to sessionDelegate: URLSessionDelegate?)
+	protocol ContainsSessionDelegateChangeable {
+            func changeSessionDelegate(to sessionDelegate: URLSessionDelegate?)
+	}
         ```
         ```swift
         LoginOutput

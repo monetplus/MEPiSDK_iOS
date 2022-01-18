@@ -504,7 +504,7 @@ Initial client certificate is used to authenticate mobile application during net
      - iOS 
         ```swift
         guard let caseMsCommunicator = CommunicatorFactory.createForCaseMs() else { return }
-        val clientId = ... // client id of application
+        let clientId = ... // client id of application
       
         let initClientCertificate = InitialClientCertificate(caseMsCommunicator: caseMsCommunicator)
         let certificateResult = initialClientCertificate.requestInitialClientCertificate(clientId: clientId)
@@ -512,41 +512,51 @@ Initial client certificate is used to authenticate mobile application during net
 
         ```
 #### Update client certificate
-Initial client certificate issued by MEP (see previous scenario) are valid only for short period (few minutes). When any login scenario takes to long to complete, initial certificate might expire. To resolve this, application can request another initial certificate, set it to class representing interupted login step and continue with the login scenario.
-Classes in MEPi SDK, that are calling enpoints protected by initial client certificates provide API to update client certificate if needed.
+Initial client certificate issued by MEP (see previous scenario) are valid only for short period (few minutes - based on backend configuration). When any login scenario takes too long to complete, initial certificate might expire. To resolve this, application can request another initial certificate, set it to class representing interrupted login step and continue with the login scenario.
+Classes in MEPi SDK, that are calling endpoints protected by initial client certificates provide API to update client certificate if needed.
 
 ##### Components & classes supporting update of client certificate: 
-    - (Android) `MEPiCommons.SslContextChangeable`
-        ```kotlin
-        interface SslContextChangeable {
-	    setSslContext(sslContext: SSLContext)
-	}
-        ```
-        ```kotlin
-        LoginOutput
-        FSiLogin
-        Scenario
-        UsernameAndPassword
-        SMS
-        LoginFinish
-        Activation
-        ```
+- `MEPiCommons.SslContextChangeable` (Android)
+- `MEPiCommons.ContainsSessionDelegateChangeable` (iOS)
+    - Android 
+      ```kotlin
+      val updatedSslContext = ... // new instance of sslContext
+      val changeable: X = ... // where X is one of classes below
+      changeable.setSslContext(updatedSslContext)
+      
+      // possible types for X:
+      // FSiLogin
+      // Scenario
+      // LoginFinish
+      // Sms
+      // UserNameAndPassword
+      // Activation
+      // BiometricLogin
+      // BiometricLoginChallenge
+      // BiometricLoginUserAuthentication
+      // Deactivation
+      // ApplicationSessionManager
+      
+      ```
 
-    - (iOS) `MEPiCommons.ContainsSessionDelegateChangeable` protocol and conforming classes
-        ```swift
-	protocol ContainsSessionDelegateChangeable {
-            func changeSessionDelegate(to sessionDelegate: URLSessionDelegate?)
-	}
-        ```
-        ```swift
-        LoginOutput
-        FSiLogin
-        Scenario
-        UsernameAndPassword
-        SMS
-        LoginFinish
-        Activation
-        ```
+    - iOS
+      ```swift
+      let updatedDelegate = ... // new instance of session delegate
+      let changeable: X = ... // where X is one of classes below
+      changeable.changeSessionDelegate(to: updatedDelegate)
+      
+      // possible types for X:
+      // LoginOutput
+      // FSiLogin
+      // LoginFinish
+      // SMS
+      // UserNameAndPassword
+      // Activation
+      // BiometricLogin
+      // BiometricLoginChallenge
+      // Deactivation
+      // ApplicationSessionManager
+      ```
 
 #### Transaction
 Preconditions for this scenario:

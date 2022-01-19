@@ -531,12 +531,6 @@ Classes in MEPi SDK, that are calling endpoints protected by initial client cert
       // Sms
       // UserNameAndPassword
       // Activation
-      // BiometricLogin
-      // BiometricLoginChallenge
-      // BiometricLoginUserAuthentication
-      // Deactivation
-      // ApplicationSessionManager
-      
       ```
 
     - iOS
@@ -552,10 +546,6 @@ Classes in MEPi SDK, that are calling endpoints protected by initial client cert
       // SMS
       // UserNameAndPassword
       // Activation
-      // BiometricLogin
-      // BiometricLoginChallenge
-      // Deactivation
-      // ApplicationSessionManager
       ```
 
 #### Transaction

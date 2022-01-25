@@ -1,3 +1,22 @@
+**15.1.1**
+* [fsi] fixed parsing of network response (with missing resendTimeout property) during login scenario (REDISB2-675)
+* [fsi] renamed SMS.expiresIn property to SMS.expiresInMilliseconds
+
+**v14.1.2**
+* [fsi] fixed parsing of network response (with missing resendTimeout property) during login scenario (REDISB2-675)
+* [fsi] renamed SMS.expiresIn property to SMS.expiresInMilliseconds
+
+**15.1.0**
+* [mepi] added missing dependency on TalsecAttestation to SPM package
+
+**15.0.0**
+* [mepi] added `InitialClientCertificateResult` data class representing issued initial client certificate (IDENTITY-978)
+* [mepi] added `InitialClientCertificate` containing `requestInitialClientCertificate` method for issuing new initial client certificate (IDENTITY-978)
+* [mepi] added new error code `7024` with mapping to `AuthGatewayCaseMobileErrorResponse` (IDENTITY-662)
+* [commons] added `ContainsSessionDelegateChangeable` interface with `changeSessionDelegate` method for updating `URLSessionDelegate` (IDENTITY-978)
+* [mepi] added implementation of `ContainsSessionDelegateChangeable` to `Activation` (IDENTITY-978)
+* [fsi] added implementation of `ContainsSessionDelegateChangeable` to `FSiLogin`, `Scenario`, `LoginFinish`, `SMS`, `UserNameAndPassword` (IDENTITY-978)
+
 **v14.1.1**
 * [commons] fixed combined parsing of overlapping positive and negative data in server response with http code 200 (IDENTITY-662)
 

@@ -1,3 +1,10 @@
+**v14.1.2**
+* [fsi] fixed parsing of network response (with missing resendTimeout property) during login scenario (REDISB2-675)
+* [fsi] renamed `SMS.expiresIn` property to `SMS.expiresInMilliseconds`
+
+**v14.1.1**
+* [commons] fixed issue with parsing error data in network response with http code 200
+
 **v14.1.0**
 * [commons] added attempt to process server error response, when http code 200 is received and positive server response parsing fails (IDENTITY-662)
 

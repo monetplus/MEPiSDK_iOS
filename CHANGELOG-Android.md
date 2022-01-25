@@ -1,3 +1,17 @@
+v9.0.0
+* [mepi] changed return type of getApplicationKeyManagers() method to optional array (CIMA-940)
+* [mepi] added check for non-existing certificate to getApplicationKeyManagers() method (CIMA-940)
+* [fsi] renamed `Sms.expiresIn` property to `Sms.expiresInMilliseconds`
+
+v8.1.0
+* [mepi] added `InitialClientCertificateResult` data class representing issued initial client certificate (IDENTITY-978)
+* [mepi] added `InitialClientCertificate` containing `requestInitialClientCertificate` method for issuing new initial client certificate (IDENTITY-978)
+* [mepi] added new error code `7024` with mapping to `AuthGTWCMErrorResponse` (IDENTITY-662)
+* [mepi] removed checks for valid certificates in `deactivate` method in `Deactivation` class
+* [commons] added `SslContextChangeable` interface with `setSslContext` method for updating `SSLContext` (IDENTITY-978)
+* [mepi] added implementation of `SslContextChangeable` to `Activation` (IDENTITY-978)
+* [fsi] added implementation of `SslContextChangeable` to `FSiLogin`, `Scenario`, `LoginFinish`, `Sms`, `UserNameAndPassword` (IDENTITY-978)
+
 v8.0.0
 * [all] removed dependency on `com.aheaditec.utils:core`
 * [mepi] updated dependencies on `com.aheaditec.talsec:ClientCertificates` to `2.0.0`

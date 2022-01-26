@@ -2,8 +2,10 @@ v9.0.0
 * [mepi] changed return type of getApplicationKeyManagers() method to optional array (CIMA-940)
 * [mepi] added check for non-existing certificate to getApplicationKeyManagers() method (CIMA-940)
 * [fsi] renamed `Sms.expiresIn` property to `Sms.expiresInMilliseconds`
+* [mepi] updated dependencies on ClientCertificates to v5.0.0 and SecureStorage to v3.0.0 (REGSB-560)
 
 v8.1.0
+* [mepi] added dependency on TalsecAttestation library
 * [mepi] added `InitialClientCertificateResult` data class representing issued initial client certificate (IDENTITY-978)
 * [mepi] added `InitialClientCertificate` containing `requestInitialClientCertificate` method for issuing new initial client certificate (IDENTITY-978)
 * [mepi] added new error code `7024` with mapping to `AuthGTWCMErrorResponse` (IDENTITY-662)

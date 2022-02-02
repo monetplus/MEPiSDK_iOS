@@ -505,9 +505,11 @@ Initial client certificate is used to authenticate mobile application during net
         ```swift
         guard let caseMsCommunicator = CommunicatorFactory.createForCaseMs() else { return }
         let clientId = ... // client id of application
+        let attestationId = ... // bundle id value
       
         let initClientCertificate = InitialClientCertificate(caseMsCommunicator: caseMsCommunicator)
-        let certificateResult = initialClientCertificate.requestInitialClientCertificate(clientId: clientId)
+        let certificateResult = initialClientCertificate.requestInitialClientCertificate(clientId: clientId
+	                                                                                 appAttestationId: attestationId)
         let clientCertificate: InitialClientCertificateResult = try clientCertificateResult.get()
 
         ```

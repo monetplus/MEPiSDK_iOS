@@ -1,13 +1,16 @@
+**16.0.0**
+* [mepi] added `appAttestationId` parameter to `requestInitialClientCertificate` method (IDENTITY-978)
+
 **15.1.1**
-* [fsi] fixed parsing of network response (with missing resendTimeout property) during login scenario (REDISB2-675)
-* [fsi] renamed SMS.expiresIn property to SMS.expiresInMilliseconds
+* [fsi] fixed parsing of network response (with missing `resendTimeout` property) during login scenario (REDISB2-675)
+* [fsi] renamed `SMS.expiresIn` property to `SMS.expiresInMilliseconds`
 
 **v14.1.2**
-* [fsi] fixed parsing of network response (with missing resendTimeout property) during login scenario (REDISB2-675)
-* [fsi] renamed SMS.expiresIn property to SMS.expiresInMilliseconds
+* [fsi] fixed parsing of network response (with missing `resendTimeout` property) during login scenario (REDISB2-675)
+* [fsi] renamed `SMS.expiresIn` property to `SMS.expiresInMilliseconds`
 
 **15.1.0**
-* [mepi] added missing dependency on TalsecAttestation to SPM package
+* [mepi] added missing dependency on `TalsecAttestation` to SPM package
 
 **15.0.0**
 * [mepi] added `InitialClientCertificateResult` data class representing issued initial client certificate (IDENTITY-978)

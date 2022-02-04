@@ -1,3 +1,6 @@
+v.10.0.0
+* [mepi] added to `appAttestationId: String` parameter to `InitialClientCertificate.requestInitialClientCertificate()` method (IDENTITY-978)
+
 v9.0.0
 * [mepi] changed return type of getApplicationKeyManagers() method to optional array (CIMA-940)
 * [mepi] added check for non-existing certificate to getApplicationKeyManagers() method (CIMA-940)

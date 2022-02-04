@@ -495,10 +495,11 @@ Initial client certificate is used to authenticate mobile application during net
         val caseMsCommunicator = NetworkCall("${serverUrl}/casems/attestation/")
         val safetyNetAPIKey = ...
         val clientId = ... // client id of application
+        val appAttestationId = ... // application id value
         val context = ...
 	
         val initClientCertificate = InitialClientCertificate(context, caseMsCommunicator, safetyNetAPIKey)
-        val certificate: InitialClientCertificateResult = clientCertificate.requestInitialClientCertificate(clientId).getSuccessOrNull()
+        val certificate: InitialClientCertificateResult = clientCertificate.requestInitialClientCertificate(clientId, appAttestationId).getSuccessOrNull()
         ```
 	
      - iOS 

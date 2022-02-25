@@ -1,3 +1,6 @@
+v11.0.0
+* [mepi] changed callback parameter type in both `BiometricUnlocker.unlock()` methods from `Boolean` to `Either<ErrorOutput, Unit>` (REDISB2-698)
+
 v.10.0.0
 * [mepi] added to `appAttestationId: String` parameter to `InitialClientCertificate.requestInitialClientCertificate()` method (IDENTITY-978)
 

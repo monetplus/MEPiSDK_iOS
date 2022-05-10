@@ -1,3 +1,13 @@
+v12.0.1
+* [mepi] fixed issues with activation & initial client certificate issuing
+* [mepi] updated dependencies on `com.aheaditec.talsec:storage` to `4.0.3`
+
+v12.0.0
+* [mepi] added `Reactivation` class with `reactivate()` method to support new scenario (IDENTITY-1402)
+* [mepi] added `activationExpiration: Date?` property to `Status` class (IDENTITY-1402)
+* [mepi] updated dependencies on `com.aheaditec.talsec:ClientCertificates` to `6.0.1`
+* [mepi] updated dependencies on `com.aheaditec.talsec:storage` to `4.0.1`
+
 v11.0.0, v8.0.1
 * [mepi] changed callback parameter type in both `BiometricUnlocker.unlock()` methods from `Boolean` to `Either<ErrorOutput, Unit>` (REDISB2-698)
 

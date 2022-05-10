@@ -1,3 +1,16 @@
+**17.1.0**
+* [mepi] removed redundant biometric prompt in `Reactivation`
+* [mepi] updated dependency on `TalsecCertificates`
+* [mepi] updated dependency on `ClientCertificates`
+* [mepi] updated dependency on `SecureStorage`
+
+**17.0.0**
+* [mepi] added `Reactivation` class with `reactivate()` method to support new scenario (IDENTITY-1402)
+    * Due to weird behavior of iOS keychain, when quering SecIdentity protected by biometry, BiometricLogin will not work on iOS 14.
+* [mepi] added `activationExpiration: Date?` property to `Status` class (IDENTITY-1402)
+* [mepi] updated dependency on `ClientCertificates`
+* [mepi] updated dependency on `SecureStorage`
+
 **16.0.0**
 * [mepi] added `appAttestationId` parameter to `requestInitialClientCertificate` method (IDENTITY-978)
 

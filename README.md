@@ -107,6 +107,7 @@ MEPi SDK supports following scenarios:
 - [Login using biometrics](#login-using-biometrics)
 - [Login using webview](#login-using-webview)
 - [Activation](#activation)
+- [Reactivation](#reactivation)
 - [Issue initial client certificate](#issue-initial-client-certificate)
 - [Update client certificate](#update-client-certificate)
 - [Transaction using SMS](#transaction)
@@ -117,10 +118,11 @@ MEPi SDK supports following scenarios:
 Following sections provide detailed description of these scenarios.
 
 #### Status
-MEPi component provides API for getting information required to decide which scenario should be presented to user by integrating application. This API provides information such as availability of CASE mobile, presence of TLS client certificate, availability of biometrics etc. Based on these data, integrating application will decide if:
+MEPi component provides API for getting information required to decide which scenario should be presented to user by integrating application. This API provides information such as availability of CASE mobile, presence of TLS client certificate and its expiration date, availability of biometrics etc. Based on these data, integrating application will decide if:
 - login using CASE mobile can be used
 - activation is required during upcoming login
 - biometrics should be activated and/or used 
+- reactivation is required after login
  
 ##### Components & classes supporting status scenario:
 - `MEPi.StatusFactory`
@@ -467,6 +469,39 @@ Activation is enrolling process of MEPi SDK. During activation data required for
                                                   clientId: clientId,
                                                   instanceId: instanceId,
                                                   biometricPrompt: "Gimme your biometrics!")
+        ```
+#### Reactivation
+Reactivation is process of renewing an almost-expired instance in MEPi SDK. This scenario requires valid app certificate and access token assigned with proper scopes. During activation data required for some MEPi SDK features are renewed:
+- new instance id is generated
+- certificates for application (with newly generated key) is renewed
+- (optional) data for biometric login are renewed
+
+##### Components & classes supporting reactivation scenario: 
+- `MEPi.Reactivation`
+- `MEPi.Status`
+    - Android
+        ```kotlin
+        val authGtwCmNetworkCall = NetworkCall("${serverUrl}/mep/fs/svc/authgtw-cm")
+        val reactivation = Reactivation(authGtwCmNetworkCall)
+
+        val keyWrapper = reactivation.getBioUnlockableKey().getSuccessOrNull()!!
+        val authenticationKey = ... // unlocked biometric key, if biometrics were activated before
+
+        val clientId = ... // client id of application
+        val accessToken = ... // token from login, with proper scope
+        val result = reactivation.reactivate(accessToken, clientId, authenticationKey)
+        val newInstanceId = result.getSuccessOrNull()!! 
+        ```
+    - iOS
+        ```swift
+        guard let communicator = CommunicatorFactory.createForAuthGtwCm()
+        let reactivation = Reactivation.init(authGatewayCaseMobileCommunicator: communicator)
+        
+        let clientId = ... // client id of application
+        let accessToken = ... // token from login, with proper scope
+        let reactivateWithBiometry = false // or true if biometrics were activated before
+        let result = reactivation.reactivate(accessToken: accessToken, clientId: clientId, useBiometry: reactivateWithBiometry)
+        let newInstanceId = try result.get()
         ```
 
 #### ID Token processing

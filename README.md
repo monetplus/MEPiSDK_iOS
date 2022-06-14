@@ -64,7 +64,6 @@ implementation("com.aheaditec.mepisdk:cmi-tp:$latest_version")
 implementation("com.aheaditec.mepisdk:commons:$latest_version")
 implementation("com.aheaditec.mepisdk:fsi:$latest_version")
 implementation("com.aheaditec.mepisdk:mepi:$latest_version")
-implementation("com.aheaditec.utils:core:$latest_version")
 implementation 'com.aheaditec.utils:network:$latest_version'
 implementation 'com.aheaditec.talsec:storage:$latest_version'
 implementation 'com.aheaditec.talsec:ClientCertificates:$latest_version'

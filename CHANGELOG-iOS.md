@@ -1,3 +1,10 @@
+**18.0.0**
+* [all] Updated to xcode 13.4
+* [all] updated all dependencies
+
+**17.2.0**
+* [all] updated dependencies on (TalsecCertificatesFramework, ClientCertificates, SecureStorage)
+
 **17.1.0**
 * [mepi] removed redundant biometric prompt in `Reactivation`
 * [mepi] updated dependency on `TalsecCertificates`

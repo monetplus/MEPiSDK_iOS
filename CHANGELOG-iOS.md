@@ -1,3 +1,6 @@
+**18.0.1**
+* updated talsec attestation dependency to 3.0.1
+
 **18.0.0**
 * [all] Updated to xcode 13.4
 * [all] updated all dependencies

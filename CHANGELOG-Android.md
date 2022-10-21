@@ -1,3 +1,15 @@
+v13.1.0
+* [fsi] removed error with mapping (`30867` -> `EProductNotAvailable`) (IDENTITY-1873)
+
+v13.0.1
+* [fsi] added new error mapping (`30876`-> `MethodNotAllowed`)
+
+v13.0.0
+* [mepi] revised error messages related to `ClientCertificatesError` & `AttestationError`
+
+v12.0.2
+* [fsi] fixed optionality of `Sms.expiresInMilliseconds` property
+
 v12.0.1
 * [mepi] fixed issues with activation & initial client certificate issuing
 * [mepi] updated dependencies on `com.aheaditec.talsec:storage` to `4.0.3`

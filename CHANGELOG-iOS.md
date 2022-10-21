@@ -1,3 +1,9 @@
+**18.1.1**
+* [mepi] updated dependency on `SecureStorage` to `7.1.0` (to resolve issues with invalidation of biometric keys)
+
+**18.1.0**
+* [mepi] revised evaluation for `Status.biometricAuthenticationActivated` to include evaluation of a `Status.applicationActivated`
+
 **18.0.1**
 * updated talsec attestation dependency to 3.0.1
 

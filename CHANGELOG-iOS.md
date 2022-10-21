@@ -1,3 +1,9 @@
+**18.2.0**
+* [fsi] removed error mapping (`30867` -> `eProductNotAvailable`) (IDENTITY-1873)
+
+**18.1.2**
+* [commons] added error mapping (`30876` -> `methodNotAllowed`) (CIMA-1620)
+
 **18.1.1**
 * [mepi] updated dependency on `SecureStorage` to `7.1.0` (to resolve issues with invalidation of biometric keys)
 

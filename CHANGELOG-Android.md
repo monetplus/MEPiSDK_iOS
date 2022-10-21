@@ -2,7 +2,7 @@ v13.1.0
 * [fsi] removed error with mapping (`30867` -> `EProductNotAvailable`) (IDENTITY-1873)
 
 v13.0.1
-* [fsi] added new error mapping (`30876`-> `MethodNotAllowed`)
+* [fsi] added new error mapping (`30876`-> `MethodNotAllowed`) (CIMA-1620)
 
 v13.0.0
 * [mepi] revised error messages related to `ClientCertificatesError` & `AttestationError`

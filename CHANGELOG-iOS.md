@@ -1,5 +1,6 @@
 **18.2.1**
 * [mepi] updated dependency on `SecureStorage` to `7.1.1` (REGSB-1818)
+* [commons] fixed parsing of `Date` header in IDtoken verification on devices with non-en language
 
 **18.2.0**
 * [fsi] removed error mapping (`30867` -> `eProductNotAvailable`) (IDENTITY-1873)

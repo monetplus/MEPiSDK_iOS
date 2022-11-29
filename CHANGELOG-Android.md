@@ -1,3 +1,6 @@
+v13.1.1, v13.0.2
+* [commons] fixed `Locale` used for parsing `Date` network header
+
 v13.1.0
 * [fsi] removed error with mapping (`30867` -> `EProductNotAvailable`) (IDENTITY-1873)
 

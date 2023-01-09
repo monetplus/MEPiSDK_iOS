@@ -1,3 +1,11 @@
+**19.0.0**
+* [mepi] updated dependency on `TalsecCertificates`
+* [mepi] updated dependency on `ClientCertificates`
+* [mepi] updated dependency on `SecureStorage`
+
+**18.2.2**
+* [all] updated `CommunicatorFramework` dependency to `7.1.1` (CIMA-1656)
+
 **18.2.1**
 * [mepi] updated dependency on `SecureStorage` to `7.1.1` (REGSB-1818)
 * [commons] fixed parsing of `Date` header in IDtoken verification on devices with non-en language

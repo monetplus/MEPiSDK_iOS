@@ -1,5 +1,19 @@
+v13.2.0
+* [commons] added `encodeToString()` method to `LoginInput` class (IASCSOBOTP-1176)
+* [commons] added `decodeFromString()` method to `LoginInput.Companion` class (IASCSOBOTP-1176)
+* [all] updated `compileSdkVersion` & `targetSdkVersion` version from `29` to `33`
+* [all] updated `org.jetbrains.kotlin.android` to `1.6.21`
+* [all] updated `com.android.tools.build:gradle` to `7.3.1`
+
+13.0.4
+* [commons] added `encodeToString()` method to `LoginInput` class (IASCSOBOTP-1176)
+* [commons] added `decodeFromString()` method to `LoginInput.Companion` class (IASCSOBOTP-1176)
+
+v13.1.2, v13.0.3
+* [mepi] added message from original exception to bio invalidation error description in `StatusFactory.getStatus()` & `BiometricLoginUserAuthentication.authenticate()` methods (CIMA-1886)
+
 v13.1.1, v13.0.2
-* [commons] fixed `Locale` used for parsing `Date` network header
+* [commons] fixed `Locale` used for parsing `Date` network header (IASCSOBOTP-1115)
 
 v13.1.0
 * [fsi] removed error with mapping (`30867` -> `EProductNotAvailable`) (IDENTITY-1873)

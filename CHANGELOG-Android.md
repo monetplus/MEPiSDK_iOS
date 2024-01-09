@@ -1,3 +1,9 @@
+v13.2.1, 
+* [mepi] updated dependencies on com.aheaditec.talsec:storage to 5.0.1
+
+v13.0.5
+* [mepi] updated dependencies on com.aheaditec.talsec:storage to 5.0.1
+
 v13.2.0
 * [commons] added `encodeToString()` method to `LoginInput` class (IASCSOBOTP-1176)
 * [commons] added `decodeFromString()` method to `LoginInput.Companion` class (IASCSOBOTP-1176)

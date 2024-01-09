@@ -1,7 +1,25 @@
+**20.0.1**
+* [mepi] updated `TalsecAttestation` dependency to `5.0.1`
+
+**20.0.0**
+* [all] updated `swit-tools-version` to `5.7`
+* [all] updated dependency on `CommunicatorFramework` to `11.0.2`
+* [all] updated dependency on `TalsecCertificates` to `12.4.0`
+* [mepi] updated dependency on `TalsecAttestation` to `4.0.0`
+* [all] fixed restrictions for minimal platform versions (`watchOS` & `macOS`) in `Package.swift`
+
+**19.2.0**
+* [all] updated dependency on `CommunicatorFramework` to `7.3.0`
+* [mepi] updated `TalsecAttestation` dependency to `5.0.1`
+* [all] fixed publishing of SDK with updated macOS, Xcode & Python
+
+**19.1.0**
+* [cmicm] added new error codes for blocked, unusable & not registered SOTP+ method
+  
 **19.0.0**
-* [mepi] updated dependency on `TalsecCertificates`
-* [mepi] updated dependency on `ClientCertificates`
-* [mepi] updated dependency on `SecureStorage`
+* [mepi] updated dependency on `TalsecCertificates` to `12.0.0`
+* [mepi] updated dependency on `ClientCertificates` to `7.0.0`
+* [mepi] updated dependency on `SecureStorage` to `9.0.0`
 
 **18.2.2**
 * [all] updated `CommunicatorFramework` dependency to `7.1.1` (CIMA-1656)
@@ -23,7 +41,7 @@
 * [mepi] revised evaluation for `Status.biometricAuthenticationActivated` to include evaluation of a `Status.applicationActivated`
 
 **18.0.1**
-* updated talsec attestation dependency to 3.0.1
+* updated `TalsecAttestation` dependency to `3.0.1`
 
 **18.0.0**
 * [all] Updated to xcode 13.4

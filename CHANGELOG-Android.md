@@ -1,4 +1,7 @@
-v13.2.1, 
+v13.2.2
+* [all] updated dependency on `ClientCertificates` to `8.0.0`
+
+v13.2.1 
 * [mepi] updated dependencies on com.aheaditec.talsec:storage to 5.0.1
 
 v13.0.5

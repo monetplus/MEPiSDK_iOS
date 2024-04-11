@@ -1,20 +1,24 @@
-v13.2.2
+**v13.2.3**
+* [commons] Added more info about IDToken validation failure to response
+* [all] updated `compileSdkVersion` & `targetSdkVersion` version from `33` to `34`
+
+**v13.2.2**
 * [all] updated dependency on `ClientCertificates` to `8.0.0`
 
-v13.2.1 
+**v13.2.1**
 * [mepi] updated dependencies on com.aheaditec.talsec:storage to 5.0.1
 
-v13.0.5
+**v13.0.5**
 * [mepi] updated dependencies on com.aheaditec.talsec:storage to 5.0.1
 
-v13.2.0
+**v13.2.0**
 * [commons] added `encodeToString()` method to `LoginInput` class (IASCSOBOTP-1176)
 * [commons] added `decodeFromString()` method to `LoginInput.Companion` class (IASCSOBOTP-1176)
 * [all] updated `compileSdkVersion` & `targetSdkVersion` version from `29` to `33`
 * [all] updated `org.jetbrains.kotlin.android` to `1.6.21`
 * [all] updated `com.android.tools.build:gradle` to `7.3.1`
 
-13.0.4
+**v13.0.4**
 * [commons] added `encodeToString()` method to `LoginInput` class (IASCSOBOTP-1176)
 * [commons] added `decodeFromString()` method to `LoginInput.Companion` class (IASCSOBOTP-1176)
 

@@ -1,3 +1,11 @@
+**20.1.0**
+* [all] added privacy manifest files
+* [all] updated dependency on `TalsecCertificates` to `12.5.0`
+* [all] updated dependency on `ClientCertificates` to `7.1.0`
+* [all] updated dependency on `SecureStorage` to `9.1.0`
+* [all] updated dependency on `CoreUtilities` to `4.2.0`
+* [all] updated dependency on `OpenSSL` to `3.1.5000`
+
 **20.0.1**
 * [mepi] updated `TalsecAttestation` dependency to `5.0.1`
 

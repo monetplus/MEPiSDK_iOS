@@ -4,34 +4,34 @@
 import PackageDescription
 
 private class Versions {
-    static let CMiTP = "20.0.1"
-    static let ClientCertificates = "7.0.0"
+    static let CMiTP = "20.1.1"
+    static let ClientCertificates = "7.1.0"
     static let CommunicatorFramework = "11.0.2"
-    static let CoreUtilities = "4.1.0"
-    static let FSi = "20.0.1"
+    static let CoreUtilities = "4.2.0"
+    static let FSi = "20.1.1"
     static let JOSESwift = "2.0.6"
-    static let MEPi = "20.0.1"
-    static let MEPiCommons = "20.0.1"
-    static let SecureStorage = "9.0.0"
-    static let TalsecCertificatesFramework = "12.4.0"
-    static let OpenSSL = "1.1.1200"
-    static let CMiWebView = "20.0.1"
+    static let MEPi = "20.1.1"
+    static let MEPiCommons = "20.1.1"
+    static let SecureStorage = "9.1.0"
+    static let TalsecCertificatesFramework = "12.5.0"
+    static let OpenSSL = "3.1.5000"
+    static let CMiWebView = "20.1.1"
     static let TalsecAttestation = "5.0.1"
 }
 
 private class Checksums {
-    static let CMiTP = "0ebaf0a2c4f42611547f64339dd43c21128273dd8b148b28e0280154a8211392"
-    static let ClientCertificates = "1bf86d943c4f04113994030236ca588ed170410f3de444718cd4166eaacc6bcf"
+    static let CMiTP = "bf14af082b20ace3c4ddd81d04da08d90e18a6cb1caa9b79b47b0c8b5ae89de6"
+    static let ClientCertificates = "2fe288d6dd7c13a2bdc506acb4fa79872a9812aa3d612dc8f1c069cd6875641b"
     static let CommunicatorFramework = "804dd18d219845b116a2a80ce67039a3cbf44f3d3ce1e7cdd2c575c697f33c9a"
-    static let CoreUtilities = "7ca72ff7251255bd613b12207529a024b525a79a728d354e2d70b5ec37c232ba"
-    static let FSi = "c4f4eb7c053013d15747f4adcae736519885f8d45a2c37b41710d769f3eb6803"
+    static let CoreUtilities = "de91c9753a277798b0624046603d0f5a1afcaf4a1aca3a1834c96dc5df6770f5"
+    static let FSi = "285b8528317ca1fc82c9c07d7ae4bbe792bd3754511a2afe47bffa6f853916dc"
     static let JOSESwift = "9a8f1d1b3d63d1c6ad3d67cc9ae34a1bdbadb9004ed244ea0e5eeef9b8e2dcd8"
-    static let MEPi = "7071db691ddb56962d584210ce36aaa911080187b84c541d751a7c9702261f97"
-    static let MEPiCommons = "72cb72b22fb7361579976a727c96ffbf7ae32e1ca1eb2ec5777130cdf39d249d"
-    static let SecureStorage = "5166fa924fa7fc40f55c0d0df8967c00e063df5f1da9ff18f1c8fb8af37e47fd"
-    static let TalsecCertificatesFramework = "8c15748c47034d42e6ab41774a15179d4038883147e2e242638e304716ad5ad5"
-    static let OpenSSL = "c253bcaf1ff5b22f544a5d7642dce422e84258a4f11833293a1d9b0334800108"
-    static let CMiWebView = "c740fb8e25979f90ebbce9d386f310187fb63de473da37dfe5f166b04333a7a6"
+    static let MEPi = "9b27c00c824aab64328eedfbfe02e72e443aedeac592c955b51c39032218aa05"
+    static let MEPiCommons = "ef2bd09628156d486be8f58af80029ded986b75071433cdcd2bbb9392b4044ba"
+    static let SecureStorage = "24667265ec916bed7c7157c4251746c815cde682011afacbd3b6876825c2c5d2"
+    static let TalsecCertificatesFramework = "e0580c88adf7c0708bd0fb6447c20bb49c9fcc27e38de37c63cca074bad0c14c"
+    static let OpenSSL = "edcbc8c9ff70a01d1d25e0ffe1d5f8af15ab6a5c57c5e579c0d518703d8eb09d"
+    static let CMiWebView = "1ff655cb0c1877aee21035646dc9487533dd2d77633442a5f5a3c3d361d3733a"
     static let TalsecAttestation = "2164404cd108aac91f21c78930f3534f9a2f380d51f96e5f0a95583b88a0b2e0"
 }
 
@@ -88,8 +88,8 @@ let package = Package(
         .binaryTarget(name: "TalsecAttestation", url: assembleUrl("talsec", "TalsecAttestation", Versions.TalsecAttestation), checksum: Checksums.TalsecAttestation),
         .binaryTarget(name: "OpenSSL", url: assembleUrl("utils", "OpenSSL", Versions.OpenSSL), checksum: Checksums.OpenSSL),
         .binaryTarget(name: "Talsec",
-                      url: "https://nexus3-public.monetplus.cz/repository/ahead-ios-release/com/aheaditec/talsec/Talsec/0.2.0/Talsec.xcframework.zip",
-                      checksum: "2ce0f47ea31179723efe33562ae3d0d287d0447309b4de746216914c3e00c13d")
+                      url: "https://nexus3-public.monetplus.cz/repository/ahead-ios-release/com/aheaditec/talsec/Talsec/1.1.1/Talsec.xcframework.zip",
+                      checksum: "f94cba307567e0af84d00cbd27379585cfd3bccdec27446a1a62fbf85f4068c4")
     ]
 )
 

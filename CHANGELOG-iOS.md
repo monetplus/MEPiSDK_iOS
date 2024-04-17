@@ -1,3 +1,6 @@
+**20.1.1**
+* [webview] updated dependency on `Talsec` to `1.1.1`
+
 **20.1.0**
 * [all] added privacy manifest files
 * [all] updated dependency on `TalsecCertificates` to `12.5.0`

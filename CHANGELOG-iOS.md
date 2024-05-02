@@ -1,3 +1,6 @@
+**20.1.3**
+* [all] updated dependency on `CommunicatorFramework` to `11.0.5`
+
 **20.1.2**
 * fixed errors from privacy report generation
 * [webview] updated dependency on `Talsec` to `1.1.2`

@@ -1,3 +1,7 @@
+**20.1.4**
+* [all] updated dependency on `ClientCertificates` to `7.0.2`
+* [all] updated dependency on `OpenSSL` to `3.1.5004`
+
 **20.1.3**
 * [all] updated dependency on `CommunicatorFramework` to `11.0.5`
 

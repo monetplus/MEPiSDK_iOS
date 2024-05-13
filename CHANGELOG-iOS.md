@@ -1,3 +1,6 @@
+**20.2.0**
+* [cmicm] Changed visibility of `create()` method on `CMiLoginRequest` struct from internal to public
+
 **20.1.4**
 * [all] updated dependency on `ClientCertificates` to `7.0.2`
 * [all] updated dependency on `OpenSSL` to `3.1.5004`

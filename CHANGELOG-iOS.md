@@ -1,3 +1,9 @@
+**20.3.0**
+* [all] updated dependency on `ClientCertificates` to `7.2.0`
+* [all] updated dependency on `OpenSSL` to `3.1.5006`
+* [all] updated dependency on `JOSESwift` to `2.0.7`
+* fixed build with Xcode 16.0 beta
+
 **20.2.0**
 * [cmicm] Changed visibility of `create()` method on `CMiLoginRequest` struct from internal to public
 

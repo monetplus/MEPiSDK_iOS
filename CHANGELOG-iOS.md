@@ -1,3 +1,9 @@
+**20.4.0**
+* [all] updated dependency on `ClientCertificates` to `7.3.0`
+* [all] updated dependency on `SecureStorage` to `9.2.0`
+* [all] updated dependency on `CoreUtilities` to `5.0.0`
+* [commons] added `JWTValidator` class
+
 **20.3.0**
 * [all] updated dependency on `ClientCertificates` to `7.2.0`
 * [all] updated dependency on `OpenSSL` to `3.1.5006`

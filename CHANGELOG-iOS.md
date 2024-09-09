@@ -1,3 +1,8 @@
+**21.0.0**
+* [fsi] added `EmailLink` class with `verifyURLCode` method
+* [commons] added `.transactionIncorrectState`, `.transactionNotFound`, `.invalidOperationType`, `.transactionRejected` values to `MEPiError` enum
+* [commons] added `emailLink` value to `Context` class
+
 **20.4.0**
 * [all] updated dependency on `ClientCertificates` to `7.3.0`
 * [all] updated dependency on `SecureStorage` to `9.2.0`

@@ -1,3 +1,31 @@
+**v14.1.3**
+* [fsi] fixed obfuscation of `OperationType` enum
+
+**v14.1.2**
+* [fsi] fixed obfuscation of `OperationType` enum
+
+**v14.1.1**
+* [fsi] added `VerifyUrlCodeResult` class
+* [fsi] fixed return type of `EmailLink.verifyURLCode()` method from `Either<ErrorOutput, VerifyUrlCodeResponse>` to `Either<ErrorOutput, VerifyUrlCodeResult>`
+
+**v14.1.0**
+* [fsi] added `EmailLink` class
+* [commons] added `JwtValidator` class
+
+**v14.0.0**
+* [all] updated Java from 11 to 17
+* [all] updated Gradle from `7.3.1` to `8.5.1`
+* [all] updated Kotlin to `2.0.0`
+* [all] migrated to TOML version catalogue
+* [all] upgraded all libs to the latest versions
+* [mepi] changed `InitialClientCertificate` constructor, now requires `AttestationConfiguration` class (Google or Huawei) and function from `AttestationAvailability`
+* [mepi] App integrating MEPi SDK now depends on `com.aheaditec.talsec.TalsecAttestation:TalsecAttestation` library
+* [mepi] App integrating MEPi SDK now depends on `com.google.android.play:integrity` library when using attestation
+* [all] updated dependency on `ClientCertificates` to `9.0.0`
+
+**v13.2.4**
+* [mepi] removed dependency on `androidx.test:core-ktx`
+
 **v13.2.3**
 * [commons] Added more info about IDToken validation failure to response
 * [all] updated `compileSdkVersion` & `targetSdkVersion` version from `33` to `34`

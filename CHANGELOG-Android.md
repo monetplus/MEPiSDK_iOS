@@ -1,3 +1,15 @@
+**v14.2.0**
+* Updated Gradle from 8.7 to 8.9
+* Updated AGP from 8.5.2 to 8.7.1
+* [mepi] Updated Client Certificates libs to fix crash on Android 8.1 (AssertionError: No NameTypeIndex match for SHORT_DAYLIGHT) during getting MEPi status
+
+**v14.1.5**
+* [commons] Added toString method for `JwtValidatorError` class
+
+**v14.1.4**
+* [fsi] fixed parsing of `VerifyUrlCodeResponse`
+* [fsi] params of `VerifyUrlCodeResult` made public
+
 **v14.1.3**
 * [fsi] fixed obfuscation of `OperationType` enum
 

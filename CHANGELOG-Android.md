@@ -1,3 +1,6 @@
+**v14.2.1**
+* [commons] Fixed technical issue with obfuscation
+
 **v14.2.0**
 * Updated Gradle from 8.7 to 8.9
 * Updated AGP from 8.5.2 to 8.7.1

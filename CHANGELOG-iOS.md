@@ -1,3 +1,10 @@
+**22.0.1**
+* [all] update dependency on `CommunicatorFramework` to `13.0.1`
+
+**22.0.0**
+* [all] revised APIs to support async-await
+* [all] updated dependency on `JOSESwift` to `3.0.0`
+
 **21.0.0**
 * [fsi] added `EmailLink` class with `verifyURLCode` method
 * [commons] added `.transactionIncorrectState`, `.transactionNotFound`, `.invalidOperationType`, `.transactionRejected` values to `MEPiError` enum

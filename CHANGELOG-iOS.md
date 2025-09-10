@@ -1,3 +1,6 @@
+**22.0.2**
+* [all] Fixed deployment target to iOS 15.0
+
 **22.0.1**
 * [all] update dependency on `CommunicatorFramework` to `13.0.1`
 

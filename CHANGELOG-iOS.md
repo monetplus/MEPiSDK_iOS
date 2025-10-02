@@ -1,3 +1,8 @@
+**23.0.0**
+* [all] updated dependency on `ClientCertificates` to `9.0.0`
+* [all] updated dependency on `SecureStorage` to `11.0.3`
+* [all] updated dependency on `TalsecCertificates` to `16.0.0`
+
 **22.0.2**
 * [all] Fixed deployment target to iOS 15.0
 
@@ -7,6 +12,7 @@
 **22.0.0**
 * [all] revised APIs to support async-await
 * [all] updated dependency on `JOSESwift` to `3.0.0`
+* [all] updated dependency on `CoreUtilities` to `6.0.0`
 
 **21.0.0**
 * [fsi] added `EmailLink` class with `verifyURLCode` method

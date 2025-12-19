@@ -1,3 +1,6 @@
+**24.0.0**
+* [all] fixed crash related to dependency on `JOSESwift`. Switched to `.dynamic` package product type.
+
 **23.0.0**
 * [all] updated dependency on `ClientCertificates` to `9.0.0`
 * [all] updated dependency on `SecureStorage` to `11.0.3`

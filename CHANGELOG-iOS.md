@@ -1,10 +1,13 @@
-**25.0.0**
-* [all] updated dependency on `TalsecCertificates` to `18.1.0`
+**26.0.0**
+* [all] updated dependency on `DynamicCertificatePinningFramework` to `18.1.0`
 * [all] update dependency on `CommunicatorFramework` to `14.1.0`
-* [mepi] updated dependency on `TalsecAttestation` to `8.0.0`
 * [webview] added optional edgarConfiguration parameter to initializers of `CMiWebViewLoginFactory` class
 * [webview] added optional edgarConfiguration parameter to initializers of `CMiWebViewTransactionFactory` class
 * [cmicm] added edgarConfiguration parameter to initializer of `NetworkConfiguration` class
+
+**25.0.0**
+* [all] updated dependency on former `TalsecCertificates` to renamed `DynamicCertificatePinningFramework` to `18.0.0`
+* [all] updated dependency on former `TalsecAttestation` to renamed `ApplicationAttestationFramework` to `8.0.0`
 
 **24.0.0**
 * [all] fixed crash related to dependency on `JOSESwift`. Switched to `.dynamic` package product type.

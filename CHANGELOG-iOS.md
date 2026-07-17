@@ -1,3 +1,6 @@
+**26.1.0**
+* [commons] changed oAuthRequest to not auto-add openid and id_token
+
 **26.0.0**
 * [all] updated dependency on `DynamicCertificatePinningFramework` to `18.1.0`
 * [all] update dependency on `CommunicatorFramework` to `14.1.0`

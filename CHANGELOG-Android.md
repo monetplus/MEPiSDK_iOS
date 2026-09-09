@@ -1,5 +1,36 @@
-Changelog:
-----------
+**v15.2.1**
+
+* [cmi-tp] Fixed the Kotlin module name, which contained a colon (`mepi:cmi-tp`) and produced an
+  invalid `META-INF/mepi:cmi-tp_release.kotlin_module` entry in the published AAR. AGP 9.4+ rejects
+  it.
+* Upgraded Gradle to 9.7.1, AGP to 9.4.0, Kotlin to 2.4.20 and also other libs to the newest version
+
+**v15.2.0**
+
+* Upgraded Gradle to 9.4.1, AGP to 9.2.0, Kotlin to 2.4.0 and also other libs to the newest version
+* Updated `compileSdkVersion` and `targetSdkVersion` to 37.
+* Added `appendOpenIdDefaults` parameter to `OAuthRequest` (default `true`, legacy behavior)
+  allowing callers to opt out of automatically appending the `openid` scope and `id_token`
+  response type. The parameter is **deprecated** and will be removed in the next major version,
+  where the request will always be sent exactly as provided.
+
+**v15.1.2**
+
+* Add `UriExtension` class to the public API for handling `LoginInput` and `LoginOutput` query
+  parameters.
+* Change `InitialClientCertificate` constructor visibility to public.
+
+**v15.1.1**
+
+* Updated network lib to 13.0.4 to fix crash on Android < 13
+* Updated storage lib to 7.3.0
+
+**v15.1.0**
+
+* Updated Java from 17 to 21
+* Updated various library versions.
+* Updated `compileSdkVersion` and `targetSdkVersion` to 36.
+
 **v15.0.0**
 
 * Updated imports from `com.aheaditec.functional` to `cz.monetplus.functional`.
